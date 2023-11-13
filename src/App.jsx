@@ -13,7 +13,7 @@ import {
 
 export default function App() {
   return (
-    <main>
+    <main className="h-screen w-screen">
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/" element={<Home />} />
