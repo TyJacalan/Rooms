@@ -1,7 +1,9 @@
-import * as types from "@/store/constants/authConstants";
+import * as types from "../constants/authConstants";
 
 export default function authReducer(state, action) {
   const { type, payload } = action;
+  console.log("type:", type, "payload:", payload);
+
   switch (type) {
     case types.SET_ACCESS_TOKEN:
       return {

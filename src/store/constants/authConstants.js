@@ -13,6 +13,7 @@ export const GET_USER_PREFERENCES_SUCCESS = "GET_USER_PREFERENCES_SUCCESS";
 export const GET_USER_PREFERENCES_FAIL = "GET_USER_PREFERENCES_FAIL";
 
 export const ERROR_MESSAGE = "Something went wrong.";
+export const SIGNIN_SUCCESS_MESSAGE = "Signed in successfully.";
 export const SIGNUP_SUCCESS_MESSAGE =
   "You have successfully created an account. You can now sign in.";
 

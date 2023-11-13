@@ -1,12 +1,14 @@
 import { createContext, useContext, useReducer } from "react";
 
 import authReducer from "../reducers/authReducer";
+import * as actions from "../actions/authActions";
+import * as types from "../constants/authConstants";
 
 const initialState = {
   userData: null,
   refreshToken: null,
   accessToken: null,
-  signInError: "test",
+  signInError: null,
   signUpError: null,
   toastMessage: null,
 };
@@ -18,6 +20,13 @@ export default function AuthProvider({ children }) {
 
   const value = {
     ...state,
+    signInAction: async (formState, navigate) => {
+      const result = await actions.signInAction(formState, navigate);
+      dispatch(result);
+    },
+    clearMessageAction: async () => {
+      dispatch({ type: types.CLEAR_MESSAGE });
+    },
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

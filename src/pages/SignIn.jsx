@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "@/store/contexts/authContext";
 
 import { Loader2 } from "lucide-react";
 import {
@@ -11,34 +12,69 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ErrorSpan } from "@/components/ui/error";
 
 export default function SignIn() {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { signInError, signInAction, clearMessageAction } = useAuthContext();
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    await signInAction({ email: email, password: password }, navigate);
+
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    if (signInError) {
+      const timeout = setTimeout(() => {
+        clearMessageAction();
+      }, 5000);
+
+      clearTimeout(timeout);
+    }
+  }, [signInError]);
 
   return (
     <Card className="w-[350px]">
-      <CardHeader>Sign In</CardHeader>
-      <CardContent>
-        <form>
+      <CardHeader className="text-2xl">Sign In</CardHeader>
+      {signInError && <ErrorSpan>{signInError}</ErrorSpan>}
+      <form onSubmit={handleSubmit}>
+        <CardContent>
           <div className="flex flex-col gap-4">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" placeholder="juan@example.com"></Input>
+            <Input
+              id="email"
+              placeholder="Your email address"
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
             <Label htmlFor="password">Password</Label>
-            <Input id="password"></Input>
+            <Input
+              id="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            ></Input>
           </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex flex-col gap-4">
-        <Button className="w-full">
-          {isLoading ? <Loader2 className="animate-spin" /> : "Log In"}
-        </Button>
-        <div className="text-center text-xs text-muted-foreground">
-          Don't have an account?{" "}
-          <Link to="/signup" className="underline cursor-pointer">
-            Sign Up
-          </Link>
-        </div>
-      </CardFooter>
+        </CardContent>
+        <CardFooter className="flex flex-col gap-4">
+          <Button className="w-full">
+            {isLoading ? <Loader2 className="animate-spin" /> : "Log In"}
+          </Button>
+          <div className="text-center text-xs text-muted-foreground">
+            Don't have an account?{" "}
+            <Link to="/signup" className="underline cursor-pointer">
+              Sign Up
+            </Link>
+          </div>
+        </CardFooter>
+      </form>
     </Card>
   );
 }
