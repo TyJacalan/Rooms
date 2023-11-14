@@ -1,11 +1,17 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 export default function RootLayout() {
+  const accessToken = JSON.parse(localStorage.getItem("profile")) || null;
+
   return (
     <>
-      <section>
-        <Outlet />
-      </section>
+      {!accessToken ? (
+        <Navigate to={"/signin"} />
+      ) : (
+        <section>
+          <Outlet />
+        </section>
+      )}
     </>
   );
 }

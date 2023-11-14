@@ -8,9 +8,9 @@ export default function AuthLayout() {
       {isAuthenticated ? (
         <Navigate to="/" />
       ) : (
-        <section className="mx-0 my-auto p-4 container h-screen w-[100vw] flex flex-row items-center">
-          <div className="hidden md:flex flex-col items-center justify-center gap-4 w-[60%] p-4 text-center">
-            <div className="text-3xl font-bold">No Slacking</div>
+        <section className="h-screen w-screen flex flex-col md:flex-row items-center justify-center md:justify-around mx-0 my-auto p-4 md:container ">
+          <div className="flex flex-col items-center justify-center gap-4 w-[350px] p-4 text-center ">
+            <div className="text-3xl font-bold">Room</div>
             <h1>
               Making work life, simpler, more pleasant, and more productive.
             </h1>
