@@ -1,6 +1,5 @@
 import * as api from "../api/authAPI";
 import * as types from "../constants/authConstants";
-import { refreshTokenAction } from "./refreshTokenAction";
 
 export async function signInAction(formData, navigate) {
   try {

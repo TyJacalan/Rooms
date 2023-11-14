@@ -10,11 +10,6 @@ export default function authReducer(state, action) {
         ...state,
         accessToken: payload ? payload : null,
       };
-    case types.SET_REFRESH_TOKEN:
-      return {
-        ...state,
-        refreshToken: payload ? payload : null,
-      };
     case types.SET_USER_DATA:
       return {
         ...state,
@@ -42,7 +37,8 @@ export default function authReducer(state, action) {
         ...state,
         userData: payload ? payload.user : null,
         accessToken: payload ? payload.accessToken : null,
-        refreshToken: payload ? payload.refreshToken : null,
+        expiry: payload ? payload.expiry : null,
+        uid: payload ? payload.uid : null,
         signInError: null,
         toastMessage: payload ? payload : null,
       };
@@ -59,28 +55,11 @@ export default function authReducer(state, action) {
       return {
         ...state,
         userData: null,
-        refreshToken: null,
         accessToken: null,
+        expiry: null,
+        uid: null,
         signInError: null,
         signUpError: null,
-        toastMessage: null,
-      };
-
-    case types.REFRESH_TOKEN_SUCCESS:
-      return {
-        ...state,
-        accessToken: payload ? payload.accessToken : null,
-        refreshToken: payload ? payload.refreshToken : null,
-      };
-
-    case types.REFRESH_TOKEN_FAIL:
-      return {
-        ...state,
-        userData: null,
-        refreshToken: null,
-        accessToken: null,
-        signUpError: [],
-        signInError: null,
         toastMessage: null,
       };
 
