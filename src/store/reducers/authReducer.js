@@ -40,7 +40,7 @@ export default function authReducer(state, action) {
         expiry: payload ? payload.expiry : null,
         uid: payload ? payload.uid : null,
         signInError: null,
-        toastMessage: payload ? payload : null,
+        toastMessage: payload ? payload.toastMessage : null,
       };
 
     case types.SIGNIN_FAIL:

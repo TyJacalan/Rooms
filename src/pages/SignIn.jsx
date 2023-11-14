@@ -27,7 +27,11 @@ export default function SignIn() {
 
     setIsLoading(true);
 
-    await signInAction({ email: email, password: password }, navigate);
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    await signInAction(formData, navigate);
 
     setIsLoading(false);
   }
@@ -38,7 +42,9 @@ export default function SignIn() {
         clearMessageAction();
       }, 5000);
 
-      clearTimeout(timeout);
+      return () => {
+        clearTimeout(timeout);
+      };
     }
   }, [signInError]);
 

@@ -26,3 +26,30 @@ export async function signInAction(formData, navigate) {
     };
   }
 }
+
+export async function signUpAction(formData, navigate) {
+  try {
+    localStorage.removeItem("profile");
+    const response = await api.signUp(formData);
+
+    const { error } = response;
+
+    if (error) {
+      return {
+        type: types.SIGNUP_FAIL,
+        payload: error,
+      };
+    } else {
+      navigate("/");
+      return {
+        type: types.SIGNUP_SUCCESS,
+        payload: types.SIGNIN_SUCCESS_MESSAGE,
+      };
+    }
+  } catch (error) {
+    return {
+      type: types.SIGNUP_FAIL,
+      payload: types.ERROR_MESSAGE,
+    };
+  }
+}

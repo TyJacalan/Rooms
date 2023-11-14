@@ -2,11 +2,7 @@ import { API, handleApiError } from "./utils";
 
 export async function signIn(formData) {
   try {
-    const response = await API.post("/auth/sign_in", formData, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await API.post("/auth/sign_in", formData);
 
     const { headers, data } = response;
 
@@ -17,9 +13,17 @@ export async function signIn(formData) {
       uid: headers["uid"],
     };
 
-    console.log(headers);
-
     return { error: null, profile };
+  } catch (error) {
+    return handleApiError(error);
+  }
+}
+
+export async function signUp(formData) {
+  try {
+    const response = await API.post("/auth/", formData);
+
+    return { error: null, data: response.data };
   } catch (error) {
     return handleApiError(error);
   }

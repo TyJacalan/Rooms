@@ -12,6 +12,9 @@ function authInterceptor(req) {
 
 export const API = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 API.interceptors.request.use(authInterceptor);

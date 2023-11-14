@@ -19,10 +19,16 @@ const AuthContext = createContext();
 export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
+  console.log(state);
+
   const value = {
     ...state,
     signInAction: async (formState, navigate) => {
       const result = await actions.signInAction(formState, navigate);
+      dispatch(result);
+    },
+    signUpAction: async (formState, navigate) => {
+      const result = await actions.signUpAction(formState, navigate);
       dispatch(result);
     },
     clearMessageAction: async () => {
