@@ -5,17 +5,6 @@ export default function authReducer(state, action) {
   console.log("type:", type, "payload:", payload);
 
   switch (type) {
-    case types.SET_ACCESS_TOKEN:
-      return {
-        ...state,
-        accessToken: payload ? payload : null,
-      };
-    case types.SET_USER_DATA:
-      return {
-        ...state,
-        userData: payload ? payload : null,
-      };
-
     case types.SIGNUP_SUCCESS:
       return {
         ...state,
@@ -61,20 +50,6 @@ export default function authReducer(state, action) {
         signInError: null,
         signUpError: null,
         toastMessage: null,
-      };
-
-    case types.GET_USER_PREFERENCES_SUCCESS:
-      return {
-        ...state,
-        userPreferences: payload ? payload : null,
-        toastMessage: null,
-      };
-
-    case types.GET_USER_PREFERENCES_FAIL:
-      return {
-        ...state,
-        userPreferences: null,
-        toastMessage: payload ? payload : null,
       };
 
     case types.CLEAR_MESSAGE:
