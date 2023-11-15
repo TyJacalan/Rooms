@@ -2,10 +2,10 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 export default function AuthLayout() {
-  let isAuthenticated = false;
+  const accessToken = JSON.parse(localStorage.getItem("profile")) || null;
   return (
     <>
-      {isAuthenticated ? (
+      {accessToken ? (
         <Navigate to="/" />
       ) : (
         <section className="h-screen w-screen flex flex-col md:flex-row items-center justify-center md:justify-around mx-0 my-auto p-4 md:container ">
