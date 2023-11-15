@@ -53,3 +53,18 @@ export async function signUpAction(formData, navigate) {
     };
   }
 }
+
+export async function logOutAction() {
+  try {
+    localStorage.removeItem("profile");
+
+    return {
+      type: types.LOGOUT,
+    };
+  } catch (error) {
+    return {
+      type: types.LOGOUT,
+      payload: types.ERROR_MESSAGE,
+    };
+  }
+}

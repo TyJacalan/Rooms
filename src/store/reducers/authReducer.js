@@ -49,7 +49,7 @@ export default function authReducer(state, action) {
         uid: null,
         signInError: null,
         signUpError: null,
-        toastMessage: null,
+        toastMessage: payload ? payload : null,
       };
 
     case types.CLEAR_MESSAGE:

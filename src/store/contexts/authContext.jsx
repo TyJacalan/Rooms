@@ -19,8 +19,6 @@ const AuthContext = createContext();
 export default function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  console.log(state);
-
   const value = {
     ...state,
     signInAction: async (formState, navigate) => {
@@ -29,6 +27,10 @@ export default function AuthProvider({ children }) {
     },
     signUpAction: async (formState, navigate) => {
       const result = await actions.signUpAction(formState, navigate);
+      dispatch(result);
+    },
+    logOutAction: async () => {
+      const result = await actions.logOutAction();
       dispatch(result);
     },
     clearMessageAction: async () => {
