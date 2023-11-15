@@ -13,7 +13,7 @@ export const SidebarContainer = React.forwardRef(
   ({ children, className, ...props }, ref) => {
     return (
       <div
-        className={`${className} w-full flex flex-col gap-4`}
+        className={`${className} w-12 sm:w-48 flex flex-col gap-4`}
         ref={ref}
         {...props}
       >
@@ -25,18 +25,18 @@ export const SidebarContainer = React.forwardRef(
 
 const SidebarItemDefault = ({ className, props, ref, icon, label, isOpen }) => (
   <div
-    className={`${className} relative h-fit w-full flex flex-row items-center justify-start gap-2 px-2 py-1 rounded-md hover:bg-gray-200 cursor-pointer transition-all`}
+    className={`${className} relative h-fit w-full flex flex-row items-center justify-start gap-2 px-2 py-1 rounded-md text-zinc-900 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80 cursor-pointer transition-all`}
     ref={ref}
     {...props}
   >
-    <div className="flex-1 flex flex-row items-center justify-start gap-2">
+    <div className="flex-1 flex flex-row items-center justify-start gap-2 ">
       {icon && <div>{icon}</div>}
       {label && <div className="hidden sm:block">{label}</div>}
     </div>
 
     {typeof isOpen === "boolean" && (
       <div
-        className={`h-4 w-4 shrink-0 text-zinc-500 transition-transform duration-300 dark:text-zinc-400 ${
+        className={`h-4 w-4 shrink-0 transition-transform duration-300  ${
           isOpen ? "rotate-180" : "rotate-0"
         }`}
       >
@@ -124,7 +124,7 @@ export const SidebarAccordion = ({
         />
       </div>
       <div
-        className={`flex flex-col gap-4 my-2 overflow-hidden transition-all`}
+        className={`flex flex-col gap-4 my-2 text-zinc-900 dark:text-zinc-50 overflow-hidden transition-all`}
       >
         {isOpen && contents && contents}
       </div>
@@ -156,11 +156,7 @@ SidebarItemIcon.displayName = "SidebarItemIcon";
 export const SidebarItemLabel = React.forwardRef(
   ({ children, className, ...props }, ref) => {
     return (
-      <div
-        className={`${className} text-zinc-900 dark:text-zinc-50 text-sm font-medium`}
-        ref={ref}
-        {...props}
-      >
+      <div className={`${className} font-medium`} ref={ref} {...props}>
         {children}
       </div>
     );
@@ -172,11 +168,7 @@ SidebarItemLabel.displayName = "SidebarItemLabel";
 export const SidebarAccordionContent = React.forwardRef(
   ({ children, className, ...props }, ref) => {
     return (
-      <div
-        className={`${className} text-zinc-900 dark:text-zinc-50 text-sm font-light`}
-        ref={ref}
-        {...props}
-      >
+      <div className={`${className}`} ref={ref} {...props}>
         {children}
       </div>
     );
