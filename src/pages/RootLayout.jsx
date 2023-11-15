@@ -10,7 +10,7 @@ export default function RootLayout() {
       {!accessToken ? (
         <Navigate to={"/signin"} />
       ) : (
-        <section className="h-screen w-screen flex flex-col min-w-max space-y-2 mx-auto p-4 overflow-hidden bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50">
+        <section className="h-screen w-screen flex flex-col min-w-max space-y-2 mx-auto p-4 overflow-hidden">
           <DashboardHeader />
           <div className="h-full w-full flex flex-row gap-4">
             <DashboardSidebar />

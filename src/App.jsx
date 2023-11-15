@@ -38,7 +38,7 @@ export default function App() {
   }, [toastMessage]);
 
   return (
-    <main className="h-screen w-screen">
+    <main className="h-screen w-screen bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50">
       <Toaster />
       <Routes>
         <Route element={<RootLayout />}>
