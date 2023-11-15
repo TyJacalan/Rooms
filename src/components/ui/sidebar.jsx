@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { cn } from "@/lib/utils";
+
 import { ChevronDown } from "lucide-react";
+import { buttonVariants } from "./button";
 
 export function Sidebar({ children }) {
   return (
@@ -25,7 +28,10 @@ export const SidebarContainer = React.forwardRef(
 
 const SidebarItemDefault = ({ className, props, ref, icon, label, isOpen }) => (
   <div
-    className={`${className} relative h-fit w-full flex flex-row items-center justify-start gap-2 px-2 py-1 rounded-md text-zinc-900 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80 cursor-pointer transition-all`}
+    className={cn(
+      buttonVariants({ variant: "ghost", className }),
+      "relative h-fit w-full cursor-pointer"
+    )}
     ref={ref}
     {...props}
   >
