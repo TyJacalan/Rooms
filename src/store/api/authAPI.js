@@ -9,6 +9,7 @@ export async function signIn(formData) {
     const profile = {
       ...data,
       access_token: headers["access-token"],
+      client: headers["client"],
       expiry: headers["expiry"],
       uid: headers["uid"],
     };
