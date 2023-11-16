@@ -11,6 +11,7 @@ export async function signIn(formData) {
       access_token: headers["access-token"],
       client: headers["client"],
       expiry: headers["expiry"],
+      id: headers["id"],
       uid: headers["uid"],
     };
 
