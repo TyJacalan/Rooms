@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 
-import { DashboardHeader, DashboardSidebar } from "@/components/shared";
+import { DashboardHeader, DashboardSidebar } from "@/components/dashboard";
 
 export default function RootLayout() {
   const accessToken = JSON.parse(localStorage.getItem("profile")) || null;

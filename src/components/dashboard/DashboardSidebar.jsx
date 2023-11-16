@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ConfigContainer, RoomsContainer } from "./";
+import { ConfigContainer, RoomsContainer } from ".";
 import { Sidebar, SidebarContainer } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 
