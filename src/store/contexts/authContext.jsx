@@ -7,6 +7,7 @@ import * as types from "../constants/authConstants";
 const initialState = {
   userData: null,
   accessToken: null,
+  client: null,
   expiry: null,
   uid: null,
   signInError: null,
