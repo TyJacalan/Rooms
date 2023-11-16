@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export default function DashboardSidebar() {
   return (
     <Sidebar>
-      <SidebarContainer className="flex-1">
+      <SidebarContainer className="flex-1 overflow-hidden">
         <Button>New</Button>
         <RoomsContainer />
       </SidebarContainer>
