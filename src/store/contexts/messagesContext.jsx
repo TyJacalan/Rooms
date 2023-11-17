@@ -8,6 +8,9 @@ const initialState = {
   directMessages: [],
   retrievedDirectMessages: [],
   retrievedRoomMessages: [],
+  usersList: [],
+  friendsList: [],
+  roomsList: [],
   toastMessage: null,
 };
 
@@ -24,6 +27,10 @@ export default function MessagesProvider({ children }) {
     },
     receiveMessageAction: async (receiverData) => {
       const result = await actions.receiveMessageAction(receiverData);
+      dispatch(result);
+    },
+    getUserListAction: async () => {
+      const result = await actions.getUserListAction();
       dispatch(result);
     },
     clearMessageAction: async () => {

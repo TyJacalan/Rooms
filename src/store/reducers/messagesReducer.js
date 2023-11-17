@@ -5,6 +5,11 @@ export default function messagesReducer(state, action) {
   console.log("type: ", type, "payload: ", payload);
 
   switch (type) {
+    case types.GET_USER_LIST:
+      return {
+        ...state,
+        usersList: payload ? payload : [],
+      };
     case types.SEND_DIRECT_MESSAGE:
       return {
         ...state,

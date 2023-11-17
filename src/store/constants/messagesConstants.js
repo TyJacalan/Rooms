@@ -15,6 +15,9 @@ export const ADD_USERS_TO_ROOM = "ADD_USERS_TO_ROOM";
 export const CREATE_ROOM_FAIL = "CREATE_ROOM_FAIL";
 export const ADD_USERS_TO_ROOM_FAIL = "ADD_USERS_TO_ROOM_FAIL";
 
+//Getting list of users
+export const GET_USER_LIST = "GET_USER_LIST";
+
 //Messages
 export const CREATE_ROOM_FAIL_MESSAGE = "Successfully created a room.";
 export const ADD_USERS_TO_ROOM_FAIL_MESSAGE = "Could not add user to the room.";

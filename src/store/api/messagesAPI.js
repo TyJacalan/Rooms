@@ -20,3 +20,13 @@ export async function receiveMessage({ receiver_id, receiver_class }) {
     return handleApiError(error);
   }
 }
+
+export async function getUserList() {
+  try {
+    const response = await API.get("/users");
+
+    return { error: null, usersData: response.data.data };
+  } catch (error) {
+    return handleApiError(error);
+  }
+}
