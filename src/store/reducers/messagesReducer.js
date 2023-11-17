@@ -10,30 +10,44 @@ export default function messagesReducer(state, action) {
         ...state,
         usersList: payload ? payload : [],
       };
-    case types.SEND_DIRECT_MESSAGE:
+    case types.SEND_MESSAGE:
       return {
         ...state,
         directMessages: payload
           ? [...state.directMessages, payload]
           : state.directMessages,
       };
-    case types.RECEIVE_DIRECT_MESSAGE:
+    case types.RETRIEVE_MESSAGE:
       return {
         ...state,
         retrievedDirectMessages: payload ? payload : [],
       };
-    case types.SEND_ROOM_MESSAGE:
-    case types.RECEIVE_ROOM_MESSAGE:
-      return {
-        ...state,
-        roomMessages: payload ? payload : [],
-      };
     case types.CREATE_ROOM:
       return {
         ...state,
-        roomMessages: payload ? payload : null,
         toastMessage: payload ? payload : null,
       };
+    case types.ADD_USER_TO_ROOM:
+      return {
+        ...state,
+        toastMessage: payload ? payload : null,
+      };
+    case types.GET_ROOMS:
+      return {
+        ...state,
+        roomsList: payload ? payload : [],
+      };
+    case types.GET_ROOMS_FAIL:
+      return {
+        ...state,
+        roomsError: payload ? payload : null,
+      };
+    case types.GET_ROOM_DETAILS:
+      return {
+        ...state,
+        retrievedRoomMessages: payload ? payload : [],
+      };
+
     case types.ACTION_FAIL:
       return {
         ...state,

@@ -11,6 +11,7 @@ const initialState = {
   usersList: [],
   friendsList: [],
   roomsList: [],
+  roomsError: null,
   toastMessage: null,
 };
 
@@ -22,18 +23,27 @@ export default function MessagesProvider({ children }) {
   const value = {
     ...state,
     sendMessageAction: async (messageData) => {
-      const result = await actions.sendMessageAction(messageData);
-      dispatch(result);
+      dispatch(actions.sendMessageAction(messageData));
     },
-    receiveMessageAction: async (receiverData) => {
-      const result = await actions.receiveMessageAction(receiverData);
-      dispatch(result);
+    retrieveMessageAction: async (receiverData) => {
+      dispatch(actions.retrieveMessagesAction(receiverData));
     },
     getUserListAction: async () => {
-      const result = await actions.getUserListAction();
-      dispatch(result);
+      dispatch(await actions.getUserListAction());
     },
-    clearMessageAction: async () => {
+    createRoomAction: async (roomData) => {
+      dispatch(await actions.createRoomAction(roomData));
+    },
+    getRoomsAction: async () => {
+      dispatch(await actions.getRoomsAction());
+    },
+    getRoomsDetailsAction: async (channelId) => {
+      dispatch(await actions.getRoomsDetailsAction(channelId));
+    },
+    addRoomMemberAction: async (addMemberRequest) => {
+      dispatch(await actions.addRoomMemberAction(addMemberRequest));
+    },
+    clearMessageAction: () => {
       dispatch({ type: types.CLEAR_MESSAGE });
     },
   };
