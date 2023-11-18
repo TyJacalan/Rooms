@@ -20,16 +20,13 @@ export default function AuthProvider({ children }) {
   const value = {
     ...state,
     signInAction: async (formState, navigate) => {
-      const result = await actions.signInAction(formState, navigate);
-      dispatch(result);
+      dispatch(await actions.signInAction(formState, navigate));
     },
     signUpAction: async (formState, navigate) => {
-      const result = await actions.signUpAction(formState, navigate);
-      dispatch(result);
+      dispatch(await actions.signUpAction(formState, navigate));
     },
     logOutAction: async () => {
-      const result = await actions.logOutAction();
-      dispatch(result);
+      dispatch(await actions.logOutAction());
     },
     clearMessageAction: async () => {
       dispatch({ type: types.CLEAR_MESSAGE });
