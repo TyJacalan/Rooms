@@ -12,6 +12,7 @@ import { Users2 } from "lucide-react";
 
 //TODO: Load list of users as accordion items
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import CreateRoomForm from "./forms/CreateRoomForm";
 
 export default function RoomsContainer() {
   const { roomsList } = useMessagesContext();
@@ -28,13 +29,19 @@ export default function RoomsContainer() {
           <Users2 />
         </SidebarItemIcon>
         <SidebarItemLabel>Rooms</SidebarItemLabel>
+        <SidebarAccordionContent className="border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50">
+          <CreateRoomForm />
+        </SidebarAccordionContent>
         {roomsList.map((room) => (
-          <SidebarAccordionContent onClick={() => handleClick(room.id)}>
+          <SidebarAccordionContent
+            key={room.id}
+            onClick={() => handleClick(room.id)}
+          >
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />
               <AvatarFallback>{room.name[0].toUpperCase()}</AvatarFallback>
             </Avatar>
-            {room.name}
+            <span className="hidden sm:block">{room.name}</span>
           </SidebarAccordionContent>
         ))}
       </SidebarItem>
