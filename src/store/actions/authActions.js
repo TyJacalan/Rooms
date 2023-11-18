@@ -43,7 +43,7 @@ export async function signUpAction(formData, navigate) {
       navigate("/");
       return {
         type: types.SIGNUP_SUCCESS,
-        payload: types.SIGNIN_SUCCESS_MESSAGE,
+        payload: types.SIGNUP_SUCCESS_MESSAGE,
       };
     }
   } catch (error) {
