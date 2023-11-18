@@ -176,8 +176,8 @@ export const SidebarAccordionContent = React.forwardRef(
     return (
       <div
         className={cn(
-          buttonVariants({ variant: "ghost", className }),
-          "flex flex-row justify-start gap-2 cursor-pointer"
+          "flex flex-row justify-center sm:justify-start gap-2 cursor-pointer",
+          buttonVariants({ variant: "ghost", className })
         )}
         ref={ref}
         {...props}
