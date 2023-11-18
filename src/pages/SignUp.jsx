@@ -19,7 +19,7 @@ export default function SignUp() {
   const [password, setPassword] = useState(null);
   const [passwordConfirmation, setPasswordConfirmation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { signUpError, signUpAction, clearMessageAction } = useAuthContext();
+  const { signUpErrors, signUpAction, clearMessageAction } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -40,25 +40,27 @@ export default function SignUp() {
   }
 
   useEffect(() => {
-    if (signUpError) {
+    if (signUpErrors) {
       const timeout = setTimeout(() => {
         clearMessageAction();
-      }, 5000);
+      }, 10000);
 
       return () => {
         clearTimeout(timeout);
       };
     }
-  }, [signUpError]);
+  }, [signUpErrors]);
 
   return (
     <Card className="w-[350px]">
       <CardHeader>Create an account</CardHeader>
-      {signUpError && <ErrorSpan>{signUpError}</ErrorSpan>}
       <form onSubmit={handleSubmit}>
         <CardContent>
           <div className="flex flex-col gap-4">
             <Label htmlFor="email">Email</Label>
+            {signUpErrors && signUpErrors.email && (
+              <ErrorSpan>{`Email ${signUpErrors.email}`}</ErrorSpan>
+            )}
             <Input
               id="email"
               placeholder="juan@example.com"
@@ -66,6 +68,9 @@ export default function SignUp() {
               onChange={(e) => setEmail(e.target.value)}
             ></Input>
             <Label htmlFor="password">Password</Label>
+            {signUpErrors && signUpErrors.password && (
+              <ErrorSpan>{`Password ${signUpErrors.password}`}</ErrorSpan>
+            )}
             <Input
               id="password"
               type="password"

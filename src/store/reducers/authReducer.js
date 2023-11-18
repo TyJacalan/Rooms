@@ -9,7 +9,7 @@ export default function authReducer(state, action) {
       return {
         ...state,
         signInError: null,
-        signUpError: null,
+        signUpErrors: {},
         toastMessage: payload ? payload : null,
       };
 
@@ -18,7 +18,7 @@ export default function authReducer(state, action) {
         ...state,
         toastMessage: null,
         signInError: null,
-        signUpError: payload ? payload : null,
+        signUpErrors: payload ? payload : {},
       };
 
     case types.SIGNIN_SUCCESS:
@@ -36,7 +36,7 @@ export default function authReducer(state, action) {
       return {
         ...state,
         toastMessage: null,
-        signUpError: null,
+        signUpErrors: {},
         signInError: payload ? payload : null,
       };
 
@@ -48,7 +48,7 @@ export default function authReducer(state, action) {
         expiry: null,
         uid: null,
         signInError: null,
-        signUpError: null,
+        signUpErrors: {},
         toastMessage: payload ? payload : null,
       };
 
@@ -57,7 +57,7 @@ export default function authReducer(state, action) {
         ...state,
         toastMessage: null,
         signInError: null,
-        signUpError: null,
+        signUpErrors: {},
       };
 
     default:
