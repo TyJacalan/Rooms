@@ -15,28 +15,8 @@ import {
 } from "./pages";
 
 import { Toaster } from "@/components/ui/toaster";
-import { useToast } from "@/components/ui/use-toast";
 
 export default function App() {
-  const { toastMessage, clearMessageAction } = useAuthContext();
-  const { toast } = useToast();
-
-  useEffect(() => {
-    if (toastMessage) {
-      toast({
-        description: toastMessage,
-      });
-
-      const timeout = setTimeout(() => {
-        clearMessageAction();
-      }, 10000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [toastMessage]);
-
   return (
     <main className="h-full w-full bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-hidden">
       <Toaster />
