@@ -174,7 +174,14 @@ SidebarItemLabel.displayName = "SidebarItemLabel";
 export const SidebarAccordionContent = React.forwardRef(
   ({ children, className, ...props }, ref) => {
     return (
-      <div className={`${className}`} ref={ref} {...props}>
+      <div
+        className={cn(
+          buttonVariants({ variant: "ghost", className }),
+          "flex flex-row justify-start gap-2 cursor-pointer"
+        )}
+        ref={ref}
+        {...props}
+      >
         {children}
       </div>
     );

@@ -45,7 +45,7 @@ export async function getRooms() {
   try {
     const response = await API.get("/channels");
 
-    return { error: null, rooms: response.data };
+    return { error: null, rooms: response.data.data };
   } catch (error) {
     return handleApiError(error);
   }
