@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 
@@ -9,32 +10,37 @@ import { DashboardHeader, DashboardSidebar } from "@/components/dashboard";
 
 export default function RootLayout() {
   const [isLoading, setIsLoading] = useState(null);
-  const accessToken = JSON.parse(localStorage.getItem("profile")) || null;
-  const { getRoomsAction, toastMessage, clearMessageAction } =
-    useMessagesContext();
+  const {
+    retrieveMessagesAction,
+    getUserListAction,
+    getRoomsAction,
+    toastMessage,
+    clearMessageAction,
+  } = useMessagesContext();
   const { toast } = useToast();
 
+  const profile = JSON.parse(localStorage.getItem("profile")) || null;
+
   useEffect(() => {
-    async function initializeApplication() {
-      try {
-        setIsLoading(true);
-        if (accessToken) {
+    if (profile) {
+      const fetchInitialData = async () => {
+        try {
+          setIsLoading(true);
+          await retrieveMessagesAction({
+            receiver_id: profile.data.id,
+            receiver_class: "User",
+          });
+          await getUserListAction();
           await getRoomsAction();
+        } catch (error) {
+          // Handle errors
+        } finally {
+          setIsLoading(false);
         }
-      } catch (error) {
-        const timeout = setTimeout(() => {
-          clearMessageAction();
-        }, 5000);
+      };
 
-        return () => {
-          clearTimeout(timeout);
-        };
-      } finally {
-        setIsLoading(false);
-      }
+      fetchInitialData();
     }
-
-    initializeApplication();
   }, []);
 
   useEffect(() => {
@@ -56,13 +62,10 @@ export default function RootLayout() {
   return (
     <>
       {isLoading ? (
-        /* Show loading indicator */
         <p>Loading...</p>
-      ) : !accessToken ? (
-        /* Navigate to sign-in if no access token */
+      ) : !profile ? (
         <Navigate to={"/signin"} />
       ) : (
-        /* Render content */
         <section className="h-screen w-screen flex flex-col space-y-2 mx-auto p-4 overflow-hidden">
           <Toaster />
           <DashboardHeader />
