@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
 import {
@@ -22,12 +24,14 @@ export default function RoomsContainer() {
         </SidebarItemIcon>
         <SidebarItemLabel>Rooms</SidebarItemLabel>
         {roomsList.map((room) => (
-          <SidebarAccordionContent key={room.name}>
+          <SidebarAccordionContent>
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />
               <AvatarFallback>{room.name[0].toUpperCase()}</AvatarFallback>
             </Avatar>
-            {room.name}
+            <Link key={room.name} to={`/:Channel/${room.id}`}>
+              {room.name}
+            </Link>
           </SidebarAccordionContent>
         ))}
       </SidebarItem>
