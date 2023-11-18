@@ -52,24 +52,20 @@ export async function retrieveMessagesAction(receiverData) {
 
 export async function getUserListAction() {
   try {
-    let usersData = JSON.parse(localStorage.getItem("usersData")) || [];
+    const response = await api.getUserList();
 
-    if (!usersData) {
-      const response = await api.getUserList();
+    const { error, usersData } = response;
 
-      const { error, usersData } = response;
-
-      if (error) {
-        return {
-          type: types.ACTION_FAIL,
-          payload: error,
-        };
-      } else {
-        return {
-          type: types.GET_USER_LIST,
-          payload: usersData,
-        };
-      }
+    if (error) {
+      return {
+        type: types.ACTION_FAIL,
+        payload: error,
+      };
+    } else {
+      return {
+        type: types.GET_USER_LIST,
+        payload: usersData,
+      };
     }
   } catch (error) {
     return {
