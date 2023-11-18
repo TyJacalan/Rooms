@@ -13,12 +13,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorSpan } from "@/components/ui/error";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function SignIn() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { signInError, signInAction, clearMessageAction } = useAuthContext();
+  const { signInError, signInAction, toastMessage, clearMessageAction } =
+    useAuthContext();
+  const { toast } = useToast();
 
   const navigate = useNavigate();
 
@@ -32,6 +35,8 @@ export default function SignIn() {
     formData.append("password", password);
 
     await signInAction(formData, navigate);
+
+    toast({ description: toastMessage, duration: 5000 });
 
     setIsLoading(false);
   }
