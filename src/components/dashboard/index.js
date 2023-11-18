@@ -1,6 +1,13 @@
+import ChatsContainer from "./ChatsContainer";
 import ConfigContainer from "./ConfigContainer";
 import DashboardSidebar from "./DashboardSidebar";
 import DashboardHeader from "./DashboardHeader";
 import RoomsContainer from "./RoomsContainer";
 
-export { ConfigContainer, DashboardSidebar, DashboardHeader, RoomsContainer };
+export {
+  ChatsContainer,
+  ConfigContainer,
+  DashboardSidebar,
+  DashboardHeader,
+  RoomsContainer,
+};
