@@ -38,13 +38,13 @@ export default function App() {
   }, [toastMessage]);
 
   return (
-    <main className="h-screen w-screen bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50">
+    <main className="h-full w-full bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-hidden">
       <Toaster />
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/Room" element={<Room />} />
+          <Route path="/:classId/:roomId" element={<Room />} />
           <Route path="/Settings" element={<Settings />} />
         </Route>
 

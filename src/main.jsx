@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 
 import { BrowserRouter } from "react-router-dom";
 
-import ThemeProvider from "@/store/contexts/themeContext.jsx";
-import AuthProvider from "@/store/contexts/authContext.jsx";
+import AuthProvider from "@/store/contexts/authContext";
+import MessagesProvider from "@/store/contexts/messagesContext";
+import ThemeProvider from "@/store/contexts/themeContext";
 
 import App from "./App.jsx";
 import "./index.css";
@@ -12,11 +13,13 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <MessagesProvider>
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
+        </MessagesProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

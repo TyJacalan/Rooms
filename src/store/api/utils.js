@@ -3,10 +3,17 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function authInterceptor(req) {
-  const accessToken = JSON.parse(localStorage.getItem("profile"))?.accessToken;
-  if (accessToken) {
-    req.headers.Authorization = `Bearer ${accessToken}`;
+  const profile = JSON.parse(localStorage.getItem("profile")) || null;
+
+  if (profile) {
+    req.headers["access-token"] = profile?.access_token || "";
+    req.headers.client = profile.client || "";
+    req.headers.expiry = profile.expiry || "";
+    req.headers.id = profile.data.id || "";
+    req.headers.uid = profile.uid || "";
   }
+
+  console.log(req);
   return req;
 }
 
@@ -20,11 +27,11 @@ export const API = axios.create({
 API.interceptors.request.use(authInterceptor);
 
 export async function handleApiError(error) {
+  console.log(error);
   try {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.message
-        ? error.response.data.message
-        : "Invalid login credentials.";
+    const errorMessage = error.message
+      ? error.message
+      : "Invalid login credentials.";
     const data = null;
 
     return { error: errorMessage, data };

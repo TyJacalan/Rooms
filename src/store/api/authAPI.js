@@ -3,13 +3,15 @@ import { API, handleApiError } from "./utils";
 export async function signIn(formData) {
   try {
     const response = await API.post("/auth/sign_in", formData);
-
+    console.log(response);
     const { headers, data } = response;
 
     const profile = {
       ...data,
       access_token: headers["access-token"],
+      client: headers["client"],
       expiry: headers["expiry"],
+      id: headers["id"],
       uid: headers["uid"],
     };
 
