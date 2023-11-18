@@ -25,8 +25,8 @@ export default function MessagesProvider({ children }) {
     sendMessageAction: async (messageData) => {
       dispatch(actions.sendMessageAction(messageData));
     },
-    retrieveMessageAction: async (receiverData) => {
-      dispatch(actions.retrieveMessagesAction(receiverData));
+    retrieveMessagesAction: async (receiverData) => {
+      dispatch(await actions.retrieveMessagesAction(receiverData));
     },
     getUserListAction: async () => {
       dispatch(await actions.getUserListAction());
