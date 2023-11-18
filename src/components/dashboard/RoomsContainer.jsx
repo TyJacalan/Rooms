@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
@@ -15,6 +15,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function RoomsContainer() {
   const { roomsList } = useMessagesContext();
+  const navigate = useNavigate();
+
+  function handleClick(roomId) {
+    navigate(`/:Channel/${roomId}`);
+  }
 
   return (
     <>
@@ -24,14 +29,12 @@ export default function RoomsContainer() {
         </SidebarItemIcon>
         <SidebarItemLabel>Rooms</SidebarItemLabel>
         {roomsList.map((room) => (
-          <SidebarAccordionContent>
+          <SidebarAccordionContent onClick={() => handleClick(room.id)}>
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />
               <AvatarFallback>{room.name[0].toUpperCase()}</AvatarFallback>
             </Avatar>
-            <Link key={room.name} to={`/:Channel/${room.id}`}>
-              {room.name}
-            </Link>
+            {room.name}
           </SidebarAccordionContent>
         ))}
       </SidebarItem>
