@@ -12,14 +12,14 @@ import { Users2 } from "lucide-react";
 
 //TODO: Load list of users as accordion items
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import CreateRoomForm from "./forms/CreateRoomForm";
+import CreateRoomForm from "./CreateRoomForm";
 
 export default function RoomsContainer() {
   const { roomsList } = useMessagesContext();
   const navigate = useNavigate();
 
   function handleClick(roomId) {
-    navigate(`/:Channel/${roomId}`);
+    navigate(`/Channel/${roomId}`);
   }
 
   return (
