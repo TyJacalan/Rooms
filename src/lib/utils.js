@@ -21,3 +21,9 @@ export function getFriendsList(messages) {
     JSON.parse
   );
 }
+
+export function findUserById(id, usersData) {
+  const userIndex = usersData.findIndex((user) => user.id === parseInt(id));
+
+  return usersData[userIndex];
+}
