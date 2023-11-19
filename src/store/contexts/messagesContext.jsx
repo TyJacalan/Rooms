@@ -10,6 +10,7 @@ const initialState = {
   retrievedRoomMessages: [],
   usersList: [],
   friendsList: [],
+  roomData: null,
   roomsList: [],
   roomsError: null,
   toastMessage: null,
@@ -42,6 +43,12 @@ export default function MessagesProvider({ children }) {
     },
     addRoomMemberAction: async (addMemberRequest) => {
       dispatch(await actions.addRoomMemberAction(addMemberRequest));
+    },
+    setRoomData: (roomData) => {
+      dispatch({ type: types.SET_ROOM_DATA, payload: roomData });
+    },
+    setToastMessage: (message) => {
+      dispatch({ type: types.SET_TOAST_MESSAGE, payload: message });
     },
     clearMessageAction: () => {
       dispatch({ type: types.CLEAR_MESSAGE });

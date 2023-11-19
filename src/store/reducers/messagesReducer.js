@@ -53,12 +53,20 @@ export default function messagesReducer(state, action) {
         ...state,
         toastMessage: payload ? payload : null,
       };
+    case types.SET_ROOM_DATA:
+      return {
+        ...state,
+        roomData: payload ? payload : null,
+      };
+    case types.SET_TOAST_MESSAGE:
+      return {
+        ...state,
+        toastMessage: payload ? payload : null,
+      };
     case types.CLEAR_MESSAGE:
       return {
         ...state,
         toastMessage: null,
-        signInError: null,
-        signUpError: null,
       };
 
     default:
