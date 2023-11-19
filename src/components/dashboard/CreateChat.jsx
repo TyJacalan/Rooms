@@ -42,6 +42,9 @@ export default function CreateChat() {
       <PopoverTrigger asChild className="w-full text-center hidden sm:block">
         <span>New Chat</span>
       </PopoverTrigger>
+      <PopoverTrigger asChild className="sm:hidden">
+        <Plus size={14} />
+      </PopoverTrigger>
       <PopoverContent className="p-2" side="right" align="start">
         <form
           className="flex flex-col gap-2"

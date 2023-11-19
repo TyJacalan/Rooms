@@ -23,8 +23,8 @@ export default function CreateRoomForm() {
       <DialogTrigger asChild className="w-full text-center hidden sm:block">
         <span>New Room</span>
       </DialogTrigger>
-      <DialogTrigger asChild className="h-4 w-4 sm:hidden">
-        <Plus />
+      <DialogTrigger>
+        <Plus size={14} />
       </DialogTrigger>
       <form>
         <DialogContent className="max-w-[80%] min-w-max sm:max-w-[425px] overflow-hidden text-zinc-900 dark:text-zinc-50">
