@@ -81,7 +81,7 @@ export default function RoomBody() {
   return (
     <div
       ref={containerRef}
-      className="flex-1 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden"
+      className="flex-1 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent"
     >
       {displayMessages.map((message, index) => (
         <MessageBubble
