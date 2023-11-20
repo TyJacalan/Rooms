@@ -10,7 +10,7 @@ const MessageBubble = React.forwardRef(
     const variantClass =
       MessageBubbleVariants[variant] || MessageBubbleVariants.primary;
 
-    const position = variant === "primary" ? "justify-start" : "justify-end";
+    const position = variant === "primary" ? "justify-end" : "justify-start";
 
     return (
       <div className={`h-fit w-full flex ${position}`} ref={ref} {...props}>
