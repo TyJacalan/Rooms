@@ -1,10 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
 import { MessageBubble } from "./MessageBubble";
 import { Loader2 } from "lucide-react";
+
+const ScrollToBottom = () => {
+  const elementRef = useRef();
+  useEffect(() =>
+    elementRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    })
+  );
+  return <div ref={elementRef} />;
+};
 
 export default function RoomBody() {
   const { classId, roomId } = useParams();
@@ -51,6 +63,7 @@ export default function RoomBody() {
           {message.body}
         </MessageBubble>
       ))}
+      <ScrollToBottom />
     </div>
   );
 }
