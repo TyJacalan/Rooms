@@ -77,6 +77,9 @@ export default function SignUp() {
               onChange={(e) => setPassword(e.target.value)}
             ></Input>
             <Label htmlFor="password">Confirm Password</Label>
+            {signUpErrors && signUpErrors.password_confirmation && (
+              <ErrorSpan>{`Password ${signUpErrors.password_confirmation}`}</ErrorSpan>
+            )}
             <Input
               id="password_confirmation"
               type="password"
