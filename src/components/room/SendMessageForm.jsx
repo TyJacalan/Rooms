@@ -27,21 +27,19 @@ export default function SendMessageForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="h-fit w-full flex flex-row items-end justify-start gap-2 p-4">
-        <Textarea
-          className="h-[1rem] min-h-[38px] bg-zinc-200 dark:bg-zinc-900 focus-visible:ring-0 resize-none"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <Button variant="ghost" size="icon">
-          {isLoading ? (
-            <Loader2 size={16} className="animate-spin" />
-          ) : (
-            <Send size={16} strokeWidth={1.5} />
-          )}
-        </Button>
-      </div>
+    <form onSubmit={handleSubmit} className="w-full flex flex-row gap-2">
+      <Textarea
+        className="h-[1rem] min-h-[38px] bg-zinc-200 dark:bg-zinc-900 focus-visible:ring-0 resize-none"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <Button variant="ghost" size="icon">
+        {isLoading ? (
+          <Loader2 size={16} className="animate-spin" />
+        ) : (
+          <Send size={16} strokeWidth={1.5} />
+        )}
+      </Button>
     </form>
   );
 }

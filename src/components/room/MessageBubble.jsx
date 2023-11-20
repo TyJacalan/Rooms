@@ -1,8 +1,8 @@
 import React from "react";
 
 const MessageBubbleVariants = {
-  primary: "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 text-zinc-50",
-  secondary: "bg-zinc-500 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-50",
+  primary: "bg-zinc-500 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-50",
+  secondary: "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 text-zinc-50",
 };
 
 const MessageBubble = React.forwardRef(
@@ -10,7 +10,7 @@ const MessageBubble = React.forwardRef(
     const variantClass =
       MessageBubbleVariants[variant] || MessageBubbleVariants.primary;
 
-    const position = variant === "primary" ? "justify-end" : "justify-start";
+    const position = variant === "primary" ? "justify-start" : "justify-end";
 
     return (
       <div className={`h-fit w-full flex ${position}`} ref={ref} {...props}>

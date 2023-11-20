@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
 
 import {
-  RoomHeader,
   RoomBody,
+  RoomFooter,
+  RoomHeader,
   RoomProfile,
-  SendMessageForm,
 } from "@/components/room";
 
 export default function Room() {
@@ -19,7 +19,7 @@ export default function Room() {
         ) : (
           <>
             <RoomBody />
-            <SendMessageForm />
+            <RoomFooter />
           </>
         )}
       </section>

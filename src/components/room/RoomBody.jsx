@@ -42,7 +42,7 @@ export default function RoomBody() {
   }
 
   return (
-    <div className="row-span-4 bg-blue-300 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden">
+    <div className="flex-1 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden">
       {conversationData.map((message, index) => (
         <MessageBubble
           key={index}
