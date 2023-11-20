@@ -24,7 +24,7 @@ export default function MessagesProvider({ children }) {
   const value = {
     ...state,
     sendMessageAction: async (messageData) => {
-      dispatch(actions.sendMessageAction(messageData));
+      dispatch(await actions.sendMessageAction(messageData));
     },
     retrieveMessagesAction: async (receiverData) => {
       dispatch(await actions.retrieveMessagesAction(receiverData));
