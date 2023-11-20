@@ -15,7 +15,7 @@ const MessageBubble = React.forwardRef(
     return (
       <div className={`h-fit w-full flex ${position}`} ref={ref} {...props}>
         <div
-          className={`h-fit w-fit max-h-[18rem] max-w-[24rem] text-left px-4 py-2 shadow-sm rounded-md text-sm overflow-y-auto ${variantClass} ${className}`}
+          className={`h-fit w-fit max-h-[18rem] max-w-[24rem] text-left px-4 py-2 shadow-sm rounded-md text-sm overflow-y-auto scrollbar-none hover:scrollbar-thin scrollbar-thumb-zinc-900 ${variantClass} ${className}`}
         >
           {children}
         </div>
