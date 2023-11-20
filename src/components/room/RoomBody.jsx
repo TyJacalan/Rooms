@@ -25,6 +25,31 @@ export default function RoomBody() {
   const [conversationData, setConversationData] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
+  const containerRef = useRef(null);
+  const [displayLimit, setDisplayLimit] = useState(20);
+
+  function handleScroll() {
+    const { scrollTop, offsetHeight, scrollHeight } = containerRef.current;
+    if (scrollTop === 0 && conversationData.length > displayLimit) {
+      // When scrolled to the top and there are more messages to load
+      const newDisplayLimit = displayLimit + 20; // Increase display limit
+      setDisplayLimit(newDisplayLimit);
+    }
+  }
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [displayLimit, conversationData]);
+
+  const displayMessages = conversationData.slice(-displayLimit);
+
   useEffect(() => {
     const fetchMessages = async () => {
       setIsLoading(false);
@@ -54,8 +79,11 @@ export default function RoomBody() {
   }
 
   return (
-    <div className="flex-1 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden">
-      {conversationData.map((message, index) => (
+    <div
+      ref={containerRef}
+      className="flex-1 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden"
+    >
+      {displayMessages.map((message, index) => (
         <MessageBubble
           key={index}
           variant={message.sender.id == roomId ? "primary" : "secondary"}
