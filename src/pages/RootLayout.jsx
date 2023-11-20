@@ -26,10 +26,6 @@ export default function RootLayout() {
       const fetchInitialData = async () => {
         try {
           setIsLoading(true);
-          await retrieveMessagesAction({
-            receiver_id: profile.data.id,
-            receiver_class: "User",
-          });
           await getUserListAction();
           await getRoomsAction();
         } catch (error) {

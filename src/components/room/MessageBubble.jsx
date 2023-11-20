@@ -1,7 +1,7 @@
 import React from "react";
 
 const MessageBubbleVariants = {
-  primary: "bg-zinc-500 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-50",
+  primary: "bg-zinc-300 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-50",
   secondary: "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 text-zinc-50",
 };
 
