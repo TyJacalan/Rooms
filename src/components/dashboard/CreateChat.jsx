@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
+import { getFriendsList, getTempNameByEmail } from "../../lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,20 +22,36 @@ import {
 } from "@/components/ui/popover";
 import { Loader2, Plus } from "lucide-react";
 
+const initialUserState = {
+  id: "",
+  uid: "",
+};
+
 export default function CreateChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(initialUserState);
   const { usersList } = useMessagesContext();
   const navigate = useNavigate();
 
-  async function handleSubmit(e, uid) {
+  async function handleSubmit(e, userData) {
     e.preventDefault();
     setIsLoading(true);
 
-    navigate(`/User/${uid}`);
+    navigate(
+      `/User/${userData.id}/${
+        userData.name ? userData.name : getTempNameByEmail(userData.uid)
+      }`
+    );
 
     setIsLoading(false);
+  }
+
+  function handleInputChange(e) {
+    setSelectedUser((prevState) => ({
+      ...prevState,
+      uid: e,
+    }));
   }
 
   return (
@@ -42,26 +59,28 @@ export default function CreateChat() {
       <PopoverTrigger asChild className="w-full text-center hidden sm:block">
         <span>New Chat</span>
       </PopoverTrigger>
+      <PopoverTrigger asChild className="sm:hidden">
+        <Plus size={14} />
+      </PopoverTrigger>
       <PopoverContent className="p-2" side="right" align="start">
         <form
           className="flex flex-col gap-2"
           onSubmit={(e) => handleSubmit(e, selectedUser)}
         >
-          <Input
-            id="user"
-            placeholder={selectedUser}
-            onChange={(e) => setSelectedUser(e.target.value)}
-          ></Input>
           <Command>
             <CommandSeparator />
-            <CommandInput placeholder="Select a user..." />
+            <CommandInput
+              placeholder="Select a user..."
+              value={selectedUser.uid}
+              onValueChange={handleInputChange}
+            />
             <CommandList>
               <CommandEmpty>No users found.</CommandEmpty>
               <CommandGroup>
                 {usersList.map((user) => (
                   <CommandItem
                     key={user.id}
-                    onSelect={() => setSelectedUser(user.id)}
+                    onSelect={() => setSelectedUser(user)}
                   >
                     {user.uid}
                   </CommandItem>

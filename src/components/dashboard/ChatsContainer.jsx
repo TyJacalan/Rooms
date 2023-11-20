@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
-import { getFriendsList } from "../../lib/utils";
+import { getFriendsList, getTempNameByEmail } from "../../lib/utils";
 
 import {
   SidebarItem,
@@ -18,8 +18,12 @@ export default function ChatsContainer() {
   const { retrievedDirectMessages } = useMessagesContext();
   const navigate = useNavigate();
 
-  function handleClick(userId) {
-    navigate(`/User/${userId}`);
+  function handleClick(userData) {
+    navigate(
+      `/User/${userData.id}/${
+        userData.name ? userData.name : getTempNameByEmail(userData.uid)
+      }`
+    );
   }
 
   const friends = useMemo(
@@ -44,7 +48,7 @@ export default function ChatsContainer() {
         friends.map((friend) => (
           <SidebarAccordionContent
             key={friend.id}
-            onClick={() => handleClick(friend.id)}
+            onClick={() => handleClick(friend)}
           >
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />

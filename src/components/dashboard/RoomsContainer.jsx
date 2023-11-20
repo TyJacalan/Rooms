@@ -18,8 +18,8 @@ export default function RoomsContainer() {
   const { roomsList } = useMessagesContext();
   const navigate = useNavigate();
 
-  function handleClick(roomId) {
-    navigate(`/Channel/${roomId}`);
+  function handleClick(room) {
+    navigate(`/Channel/${room.id}/${room.name}`);
   }
 
   return (
@@ -35,7 +35,7 @@ export default function RoomsContainer() {
         {roomsList.map((room) => (
           <SidebarAccordionContent
             key={room.id}
-            onClick={() => handleClick(room.id)}
+            onClick={() => handleClick(room)}
           >
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />

@@ -66,10 +66,10 @@ export default function RootLayout() {
       ) : !profile ? (
         <Navigate to={"/signin"} />
       ) : (
-        <section className="h-screen w-screen flex flex-col space-y-2 mx-auto p-4 overflow-hidden">
+        <section className="h-screen w-screen flex flex-col space-y-4 mx-auto p-4 overflow-hidden">
           <Toaster />
           <DashboardHeader />
-          <div className="h-full w-full flex flex-row gap-4">
+          <div className="flex-1 w-full flex flex-row gap-4 overflow-hidden">
             <DashboardSidebar />
             <Outlet />
           </div>

@@ -44,7 +44,8 @@ export default function App() {
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Profile" element={<Profile />} />
-          <Route path="/:classId/:roomId" element={<Room />} />
+          <Route path="/:classId/:roomId/:name" element={<Room />} />
+          <Route path="/:classId/:roomId/:name/Profile" element={<Room />} />
           <Route path="/Settings" element={<Settings />} />
         </Route>
 

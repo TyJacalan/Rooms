@@ -9,7 +9,7 @@ export function getFriendsList(messages) {
   return Array.from(
     new Set(
       messages.map((message) => {
-        const emailWithoutDomain = message.sender.uid.split("@")[0];
+        const emailWithoutDomain = getTempNameByEmail(message.sender.uid);
 
         return JSON.stringify({
           id: message.sender.id,
@@ -20,4 +20,20 @@ export function getFriendsList(messages) {
     ),
     JSON.parse
   );
+}
+
+export function getTempNameByEmail(email) {
+  return email.split("@")[0];
+}
+
+export function findUserById(id, usersData) {
+  const userIndex = usersData.findIndex((user) => user.id === parseInt(id));
+
+  return usersData[userIndex];
+}
+
+export function findRoomById(id, roomsList) {
+  const roomIndex = roomsList.findIndex((room) => room.id === parseInt(id));
+
+  return roomsList[roomIndex];
 }
