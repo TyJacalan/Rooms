@@ -8,13 +8,13 @@ import { Loader2 } from "lucide-react";
 
 export default function RoomBody() {
   const { classId, roomId } = useParams();
-  const { directMessages, retrievedDirectMessages, retrieveMessagesAction } =
+  const { retrievedDirectMessages, retrieveMessagesAction } =
     useMessagesContext();
+  const [conversationData, setConversationData] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
     const fetchMessages = async () => {
-      console.log(classId, roomId);
       setIsLoading(false);
       await retrieveMessagesAction({
         receiver_id: parseInt(roomId),
@@ -27,6 +27,12 @@ export default function RoomBody() {
     fetchMessages();
   }, [classId, roomId]);
 
+  useEffect(() => {
+    if (retrievedDirectMessages) {
+      setConversationData(retrievedDirectMessages);
+    }
+  }, [retrieveMessagesAction]);
+
   if (isLoading) {
     return (
       <div className="flex-1 w-full items-center justify-center">
@@ -36,11 +42,11 @@ export default function RoomBody() {
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden">
-      {retrievedDirectMessages.map((message, index) => (
+    <div className="row-span-4 bg-blue-300 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden">
+      {conversationData.map((message, index) => (
         <MessageBubble
           key={index}
-          variant={message.receiver.id === roomId ? "secondary" : "primary"}
+          variant={message.sender.id == roomId ? "primary" : "secondary"}
         >
           {message.body}
         </MessageBubble>

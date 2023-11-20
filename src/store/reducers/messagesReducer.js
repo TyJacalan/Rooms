@@ -13,9 +13,9 @@ export default function messagesReducer(state, action) {
     case types.SEND_MESSAGE:
       return {
         ...state,
-        directMessages: payload
-          ? [...state.directMessages, payload]
-          : state.directMessages,
+        retrievedDirectMessages: payload
+          ? [...state.retrievedDirectMessages, payload]
+          : state.retrievedDirectMessages,
       };
     case types.RETRIEVE_MESSAGE:
       return {

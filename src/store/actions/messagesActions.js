@@ -2,10 +2,12 @@ import * as api from "../api/messagesAPI";
 import * as types from "../constants/messagesConstants";
 
 export async function sendMessageAction(messageData) {
+  const profile = JSON.parse(localStorage.getItem("profile")) || null;
+
   try {
     const response = await api.sendMessage(messageData);
 
-    const { error } = response;
+    const { error, data } = response;
 
     if (error) {
       return {
@@ -13,9 +15,17 @@ export async function sendMessageAction(messageData) {
         payload: error,
       };
     } else {
+      const modifiedData = {
+        ...data.data,
+        sender: {
+          uid: profile ? profile.uid : null,
+          id: profile ? profile.data.id : null,
+        },
+      };
+
       return {
         type: types.SEND_MESSAGE,
-        payload: messageData,
+        payload: modifiedData,
       };
     }
   } catch (error) {
