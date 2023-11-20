@@ -15,7 +15,6 @@ import { MessageSquare } from "lucide-react";
 import CreateChat from "./CreateChat";
 
 export default function ChatsContainer() {
-  const { retrievedDirectMessages } = useMessagesContext();
   const navigate = useNavigate();
 
   function handleClick(userData) {
@@ -26,10 +25,7 @@ export default function ChatsContainer() {
     );
   }
 
-  const friends = useMemo(
-    () => getFriendsList(retrievedDirectMessages),
-    [retrievedDirectMessages]
-  );
+  const friendsList = JSON.parse(localStorage.getItem("friendsList")) || [];
 
   return (
     <SidebarItem accordion>
@@ -40,12 +36,12 @@ export default function ChatsContainer() {
       <SidebarAccordionContent className="border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50">
         <CreateChat />
       </SidebarAccordionContent>
-      {!friends ? (
+      {!friendsList ? (
         <SidebarAccordionContent className="hidden sm:flex">
           Nothing to display
         </SidebarAccordionContent>
       ) : (
-        friends.map((friend) => (
+        friendsList.map((friend) => (
           <SidebarAccordionContent
             key={friend.id}
             onClick={() => handleClick(friend)}
@@ -54,7 +50,9 @@ export default function ChatsContainer() {
               <AvatarImage src="/" />
               <AvatarFallback>{friend.uid[0].toUpperCase()}</AvatarFallback>
             </Avatar>
-            <span className="hidden sm:block">{friend.name}</span>
+            <span className="hidden sm:block">
+              {getTempNameByEmail(friend.uid)}
+            </span>
           </SidebarAccordionContent>
         ))
       )}

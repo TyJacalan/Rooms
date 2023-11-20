@@ -31,12 +31,22 @@ export default function CreateChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(initialUserState);
-  const { usersList } = useMessagesContext();
+  const { usersList, setFriendsList } = useMessagesContext();
   const navigate = useNavigate();
 
   async function handleSubmit(e, userData) {
     e.preventDefault();
     setIsLoading(true);
+
+    const newFriend = { id: userData.id, uid: userData.uid };
+
+    const existingFriendsList =
+      JSON.parse(localStorage.getItem("friendsList")) || [];
+
+    const updatedFriendsList = [...existingFriendsList, newFriend];
+
+    localStorage.setItem("friendsList", JSON.stringify(updatedFriendsList));
+    setFriendsList(updatedFriendsList);
 
     navigate(
       `/User/${userData.id}/${
