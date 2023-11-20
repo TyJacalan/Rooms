@@ -23,6 +23,8 @@ export default function SendMessageForm() {
       body: message,
     });
 
+    setMessage("");
+
     setIsLoading(false);
   }
 
