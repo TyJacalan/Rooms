@@ -17,7 +17,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,9 +25,9 @@ import { Loader2, Plus, X } from "lucide-react";
 export default function CreateRoomForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [roomName, setRoomName] = useState("");
-  const [usersList, setUsersList] = useState("");
+  const [usersList, setUsersList] = useState([]);
   const [userName, setUserName] = useState("");
-  const { createRoomAction } = useMessagesContext();
+  const { createRoomAction, getRoomsAction } = useMessagesContext();
 
   function handleUserInput(e) {
     setUserName(e);
@@ -49,18 +48,18 @@ export default function CreateRoomForm() {
     setUsersList(updatedList);
   }
 
-  function handleSubmit() {
-    console.log(roomName);
-    console.log(usersList);
-
+  async function handleSubmit() {
+    setIsLoading(true);
     const usersIds = usersList.map((user) => user.id);
 
-    console.log(usersIds);
-
-    createRoomAction({
+    await createRoomAction({
       name: roomName,
-      user_ids: usersList,
+      user_ids: usersIds,
     });
+
+    await getRoomsAction();
+
+    setIsLoading(false);
   }
 
   const friendsList = JSON.parse(localStorage.getItem("friendsList")) || null;
