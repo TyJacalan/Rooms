@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
-import { getFriendsList, getTempNameByEmail } from "../../lib/utils";
+import { getTempNameByEmail } from "../../lib/utils";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Command,
   CommandEmpty,
@@ -31,7 +30,7 @@ export default function CreateChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(initialUserState);
-  const { usersList, setFriendsList } = useMessagesContext();
+  const { usersList } = useMessagesContext();
   const navigate = useNavigate();
 
   async function handleSubmit(e, userData) {
@@ -46,7 +45,6 @@ export default function CreateChat() {
     const updatedFriendsList = [...existingFriendsList, newFriend];
 
     localStorage.setItem("friendsList", JSON.stringify(updatedFriendsList));
-    setFriendsList(updatedFriendsList);
 
     navigate(
       `/User/${userData.id}/${

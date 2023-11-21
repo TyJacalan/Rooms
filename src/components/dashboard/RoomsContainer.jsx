@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Users2 } from "lucide-react";
 
-//TODO: Load list of users as accordion items
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CreateRoomForm from "./CreateRoomForm";
 
