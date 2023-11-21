@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
 import { MessageBubble } from "./MessageBubble";
+import ChatBubbleContainer from "./ChatBubbleContainer";
+import RoomBubbleContainer from "./RoomBubbleContainer";
 import { Loader2 } from "lucide-react";
 
 const ScrollToBottom = () => {
@@ -29,10 +31,9 @@ export default function RoomBody() {
   const [displayLimit, setDisplayLimit] = useState(20);
 
   function handleScroll() {
-    const { scrollTop, offsetHeight, scrollHeight } = containerRef.current;
+    const { scrollTop } = containerRef.current;
     if (scrollTop === 0 && conversationData.length > displayLimit) {
-      // When scrolled to the top and there are more messages to load
-      const newDisplayLimit = displayLimit + 20; // Increase display limit
+      const newDisplayLimit = displayLimit + 20;
       setDisplayLimit(newDisplayLimit);
     }
   }
@@ -83,14 +84,12 @@ export default function RoomBody() {
       ref={containerRef}
       className="flex-1 h-full w-full flex flex-col gap-2 px-4 mt-2 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent"
     >
-      {displayMessages.map((message, index) => (
-        <MessageBubble
-          key={index}
-          variant={message.sender.id == roomId ? "primary" : "secondary"}
-        >
-          {message.body}
-        </MessageBubble>
-      ))}
+      {classId === "User" ? (
+        <ChatBubbleContainer displayMessages={displayMessages} />
+      ) : (
+        <RoomBubbleContainer displayMessages={displayMessages} />
+      )}
+
       <ScrollToBottom />
     </div>
   );
