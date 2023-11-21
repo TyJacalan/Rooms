@@ -29,12 +29,7 @@ API.interceptors.request.use(authInterceptor);
 export async function handleApiError(error) {
   console.log(error);
   try {
-    const errorMessage = error.message
-      ? error.message
-      : "Invalid login credentials.";
-    const data = null;
-
-    return { error: errorMessage, data };
+    return { error: error, data: null };
   } catch (err) {
     throw new Error("An unexpected error occurred.");
   }

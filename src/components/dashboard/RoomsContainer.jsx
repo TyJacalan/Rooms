@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Users2 } from "lucide-react";
 
-//TODO: Load list of users as accordion items
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CreateRoomForm from "./CreateRoomForm";
 
@@ -18,8 +17,8 @@ export default function RoomsContainer() {
   const { roomsList } = useMessagesContext();
   const navigate = useNavigate();
 
-  function handleClick(roomId) {
-    navigate(`/Channel/${roomId}`);
+  function handleClick(room) {
+    navigate(`/Channel/${room.id}/${room.name}`);
   }
 
   return (
@@ -35,7 +34,7 @@ export default function RoomsContainer() {
         {roomsList.map((room) => (
           <SidebarAccordionContent
             key={room.id}
-            onClick={() => handleClick(room.id)}
+            onClick={() => handleClick(room)}
           >
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />

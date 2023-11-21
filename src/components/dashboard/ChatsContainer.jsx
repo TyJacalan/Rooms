@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
-import { getFriendsList } from "../../lib/utils";
+import { getFriendsList, getTempNameByEmail } from "../../lib/utils";
 
 import {
   SidebarItem,
@@ -15,17 +15,17 @@ import { MessageSquare } from "lucide-react";
 import CreateChat from "./CreateChat";
 
 export default function ChatsContainer() {
-  const { retrievedDirectMessages } = useMessagesContext();
   const navigate = useNavigate();
 
-  function handleClick(userId) {
-    navigate(`/User/${userId}`);
+  function handleClick(userData) {
+    navigate(
+      `/User/${userData.id}/${
+        userData.name ? userData.name : getTempNameByEmail(userData.uid)
+      }`
+    );
   }
 
-  const friends = useMemo(
-    () => getFriendsList(retrievedDirectMessages),
-    [retrievedDirectMessages]
-  );
+  const friendsList = JSON.parse(localStorage.getItem("friendsList")) || [];
 
   return (
     <SidebarItem accordion>
@@ -36,21 +36,23 @@ export default function ChatsContainer() {
       <SidebarAccordionContent className="border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50">
         <CreateChat />
       </SidebarAccordionContent>
-      {!friends ? (
+      {!friendsList ? (
         <SidebarAccordionContent className="hidden sm:flex">
           Nothing to display
         </SidebarAccordionContent>
       ) : (
-        friends.map((friend) => (
+        friendsList.map((friend) => (
           <SidebarAccordionContent
             key={friend.id}
-            onClick={() => handleClick(friend.id)}
+            onClick={() => handleClick(friend)}
           >
             <Avatar className="h-6 w-6">
               <AvatarImage src="/" />
               <AvatarFallback>{friend.uid[0].toUpperCase()}</AvatarFallback>
             </Avatar>
-            <span className="hidden sm:block">{friend.name}</span>
+            <span className="hidden sm:block">
+              {getTempNameByEmail(friend.uid)}
+            </span>
           </SidebarAccordionContent>
         ))
       )}

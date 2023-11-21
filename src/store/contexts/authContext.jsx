@@ -8,7 +8,7 @@ const initialState = {
   userData: null,
   accessToken: null,
   signInError: null,
-  signUpError: null,
+  signUpErrors: {},
   toastMessage: null,
 };
 

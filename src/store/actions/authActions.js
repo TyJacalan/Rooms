@@ -9,7 +9,7 @@ export async function signInAction(formData, navigate) {
     if (error) {
       return {
         type: types.SIGNIN_FAIL,
-        payload: error,
+        payload: error.response.data.errors,
       };
     } else {
       localStorage.setItem("profile", JSON.stringify(profile));
@@ -37,7 +37,7 @@ export async function signUpAction(formData, navigate) {
     if (error) {
       return {
         type: types.SIGNUP_FAIL,
-        payload: error,
+        payload: error.response.data.errors,
       };
     } else {
       navigate("/");

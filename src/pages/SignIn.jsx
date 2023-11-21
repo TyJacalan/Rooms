@@ -56,10 +56,10 @@ export default function SignIn() {
   return (
     <Card className="w-[350px]">
       <CardHeader className="text-2xl">Sign In</CardHeader>
-      {signInError && <ErrorSpan>{signInError}</ErrorSpan>}
       <form onSubmit={handleSubmit}>
         <CardContent>
           <div className="flex flex-col gap-4">
+            {signInError && <ErrorSpan>{signInError}</ErrorSpan>}
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
