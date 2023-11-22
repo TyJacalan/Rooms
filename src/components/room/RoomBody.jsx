@@ -6,7 +6,6 @@ import { useMessagesContext } from "@/store/contexts/messagesContext";
 import SimpleLoader from "@/components/shared/SimpleLoader";
 import ChatBubbleContainer from "./ChatBubbleContainer";
 import RoomBubbleContainer from "./RoomBubbleContainer";
-import { Loader2 } from "lucide-react";
 
 const ScrollToBottom = () => {
   const elementRef = useRef();
@@ -24,7 +23,6 @@ export default function RoomBody() {
   const { classId, roomId } = useParams();
   const { retrievedDirectMessages, retrieveMessagesAction } =
     useMessagesContext();
-  const [conversationData, setConversationData] = useState([]);
   const [isLoading, setIsLoading] = useState();
 
   const containerRef = useRef(null);
@@ -32,7 +30,7 @@ export default function RoomBody() {
 
   function handleScroll() {
     const { scrollTop } = containerRef.current;
-    if (scrollTop === 0 && conversationData.length > displayLimit) {
+    if (scrollTop === 0 && retrievedDirectMessages.length > displayLimit) {
       const newDisplayLimit = displayLimit + 20;
       setDisplayLimit(newDisplayLimit);
     }
@@ -47,9 +45,9 @@ export default function RoomBody() {
         containerRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [displayLimit, conversationData]);
+  }, [displayLimit]);
 
-  const displayMessages = conversationData.slice(-displayLimit);
+  const displayMessages = retrievedDirectMessages.slice(-displayLimit);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -77,12 +75,6 @@ export default function RoomBody() {
 
     return () => clearInterval(intervalId);
   }, [roomId]);
-
-  useEffect(() => {
-    if (retrievedDirectMessages) {
-      setConversationData(retrievedDirectMessages);
-    }
-  }, [retrieveMessagesAction]);
 
   if (isLoading) {
     return <SimpleLoader />;
