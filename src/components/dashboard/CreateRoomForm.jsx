@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import { useComponentContext } from "@/store/contexts/componentContext";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +25,7 @@ import { Label } from "@/components/ui/label";
 import { Loader2, Plus, X } from "lucide-react";
 
 export default function CreateRoomForm() {
+  const { isCreateRoomOpen, toggleCreateRoom } = useComponentContext();
   const [isLoading, setIsLoading] = useState(false);
   const [roomName, setRoomName] = useState("");
   const [usersList, setUsersList] = useState([]);
@@ -65,7 +68,7 @@ export default function CreateRoomForm() {
   const friendsList = JSON.parse(localStorage.getItem("friendsList")) || null;
 
   return (
-    <Dialog>
+    <Dialog open={isCreateRoomOpen} onOpenChange={toggleCreateRoom}>
       <DialogTrigger asChild className="w-full text-center hidden sm:block">
         <span>New Room</span>
       </DialogTrigger>
