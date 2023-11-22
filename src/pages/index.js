@@ -6,6 +6,7 @@ import RootLayout from "./RootLayout";
 import Settings from "./Settings";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import ErrorPage from "./ErrorPage";
 
 export {
   AuthLayout,
@@ -16,4 +17,5 @@ export {
   Settings,
   SignIn,
   SignUp,
+  ErrorPage,
 };

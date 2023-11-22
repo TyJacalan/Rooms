@@ -12,6 +12,7 @@ import {
   Settings,
   SignIn,
   SignUp,
+  ErrorPage,
 } from "./pages";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </main>
   );
