@@ -139,7 +139,7 @@ export async function getRoomsDetailsAction(channelId) {
   try {
     const response = await api.getRoomsDetails(channelId);
 
-    const { error, roomDetails } = response;
+    const { error, data } = response;
 
     if (error) {
       return {
@@ -149,7 +149,7 @@ export async function getRoomsDetailsAction(channelId) {
     } else {
       return {
         type: types.GET_ROOM_DETAILS,
-        payload: roomDetails,
+        payload: data.data.data,
       };
     }
   } catch (error) {
