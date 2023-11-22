@@ -4,12 +4,14 @@ import { Outlet, Navigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
+import LoadingPage from "./LoadingPage";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import { DashboardHeader, DashboardSidebar } from "@/components/dashboard";
 
 export default function RootLayout() {
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadPage, setLoadPage] = useState(false);
   const {
     retrieveMessagesAction,
     getUserListAction,
@@ -55,10 +57,14 @@ export default function RootLayout() {
     }
   }, [toastMessage]);
 
+  function toggleLoadPage() {
+    setLoadPage(true);
+  }
+
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
+      {!loadPage ? (
+        <LoadingPage isLoading={isLoading} toggleLoadPage={toggleLoadPage} />
       ) : !profile ? (
         <Navigate to={"/signin"} />
       ) : (
