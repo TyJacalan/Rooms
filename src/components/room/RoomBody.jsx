@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
-import { MessageBubble } from "./MessageBubble";
 import ChatBubbleContainer from "./ChatBubbleContainer";
 import RoomBubbleContainer from "./RoomBubbleContainer";
 import { Loader2 } from "lucide-react";
@@ -62,8 +61,10 @@ export default function RoomBody() {
       setIsLoading(false);
     };
 
-    fetchMessages();
-  }, [classId, roomId]);
+    const intervalId = setInterval(fetchMessages, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [roomId]);
 
   useEffect(() => {
     if (retrievedDirectMessages) {
