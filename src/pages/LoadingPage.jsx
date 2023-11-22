@@ -16,7 +16,6 @@ export default function LoadingPage({ isLoading, toggleLoadPage }) {
 
   useEffect(() => {
     if (!isLoading && progressValue >= 98) {
-      console.log(isLoading);
       setProgressValue(100);
 
       const timeout = setTimeout(() => {

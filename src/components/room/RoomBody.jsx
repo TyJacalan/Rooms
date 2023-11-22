@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
+import SimpleLoader from "@/components/shared/SimpleLoader";
 import ChatBubbleContainer from "./ChatBubbleContainer";
 import RoomBubbleContainer from "./RoomBubbleContainer";
 import { Loader2 } from "lucide-react";
@@ -84,11 +85,7 @@ export default function RoomBody() {
   }, [retrieveMessagesAction]);
 
   if (isLoading) {
-    return (
-      <div className="flex-1 h-full w-full flex items-center justify-center">
-        <Loader2 className="animate-spin" />
-      </div>
-    );
+    return <SimpleLoader />;
   }
 
   return (
