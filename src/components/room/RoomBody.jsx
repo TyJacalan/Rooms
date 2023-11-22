@@ -52,7 +52,7 @@ export default function RoomBody() {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      setIsLoading(false);
+      setIsLoading(true);
       await retrieveMessagesAction({
         receiver_id: parseInt(roomId),
         receiver_class: classId,
@@ -61,10 +61,21 @@ export default function RoomBody() {
       setIsLoading(false);
     };
 
+    fetchMessages();
+  }, [roomId]);
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      await retrieveMessagesAction({
+        receiver_id: parseInt(roomId),
+        receiver_class: classId,
+      });
+    };
+
     const intervalId = setInterval(fetchMessages, 1000);
 
     return () => clearInterval(intervalId);
-  }, [roomId]);
+  }, []);
 
   useEffect(() => {
     if (retrievedDirectMessages) {
@@ -74,7 +85,7 @@ export default function RoomBody() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 w-full items-center justify-center">
+      <div className="flex-1 h-full w-full flex items-center justify-center">
         <Loader2 className="animate-spin" />
       </div>
     );
