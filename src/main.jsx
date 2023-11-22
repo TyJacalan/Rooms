@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import AuthProvider from "@/store/contexts/authContext";
+import ComponentProvider from "@/store/contexts/ComponentContext.jsx";
 import MessagesProvider from "@/store/contexts/messagesContext";
 import ThemeProvider from "@/store/contexts/themeContext";
 
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <MessagesProvider>
           <ThemeProvider>
-            <App />
+            <ComponentProvider>
+              <App />
+            </ComponentProvider>
           </ThemeProvider>
         </MessagesProvider>
       </AuthProvider>
