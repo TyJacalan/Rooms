@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 import { findUserById } from "@/lib/utils";
 
+import SimpleLoader from "@/components/shared/simpleLoader";
 import {
   ProfileContainer,
   ProfileInfoContainer,
@@ -27,9 +28,7 @@ export default function RoomInfo() {
       setIsLoading(true);
       await getRoomsDetailsAction(roomId);
 
-      console.log(roomData);
-
-      if (roomData) {
+      if (Object.keys(roomData).length > 0) {
         const members = roomData.channel_members.map((member) =>
           findUserById(member.user_id, usersList)
         );
@@ -43,18 +42,21 @@ export default function RoomInfo() {
           members: members,
         }));
       }
+
       setIsLoading(false);
     }
 
     getRoomDetails();
-  }, []);
+  }, [roomId]);
 
   const { name, ownerName, members } = roomDetails;
 
+  console.log(isLoading);
+
   return (
     <ProfileContainer>
-      {isLoading ? (
-        <div>...Loading</div>
+      {isLoading || !name || !ownerName || !members ? (
+        <SimpleLoader />
       ) : (
         <>
           <Avatar className="h-24 w-24 text-6xl">
@@ -71,9 +73,10 @@ export default function RoomInfo() {
             </ProfileInfoItem>
             <ProfileInfoItem>
               <span className="text-zinc-400">Members</span>
-              {members.map((member) => (
-                <div key={member.id}>{member.uid}</div>
-              ))}
+              {members.length > 0 &&
+                members.map((member) => (
+                  <div key={member.id}>{member.uid}</div>
+                ))}
             </ProfileInfoItem>
           </ProfileInfoContainer>
         </>
