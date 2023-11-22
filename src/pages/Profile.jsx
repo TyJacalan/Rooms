@@ -10,8 +10,6 @@ export default function Profile() {
 
   const { uid, email, name, nickname } = profileData;
 
-  console.log(profileData);
-
   return (
     <ProfileContainer>
       <Avatar className="h-24 w-24 text-6xl">
