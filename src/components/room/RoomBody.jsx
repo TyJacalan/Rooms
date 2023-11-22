@@ -2,28 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
+import useDebouncedFetch from "@/hooks/useDebouncedFetch";
 
 import SimpleLoader from "@/components/shared/SimpleLoader";
 import ChatBubbleContainer from "./ChatBubbleContainer";
 import RoomBubbleContainer from "./RoomBubbleContainer";
-
-const ScrollToBottom = () => {
-  const elementRef = useRef();
-  useEffect(() =>
-    elementRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    })
-  );
-  return <div ref={elementRef} />;
-};
+import ScrollToBottom from "@/components/shared/ScrollToBottom";
 
 export default function RoomBody() {
   const { classId, roomId } = useParams();
   const { retrievedDirectMessages, retrieveMessagesAction } =
     useMessagesContext();
-  const [isLoading, setIsLoading] = useState();
 
   const containerRef = useRef(null);
   const [displayLimit, setDisplayLimit] = useState(20);
@@ -47,38 +36,20 @@ export default function RoomBody() {
     };
   }, [displayLimit]);
 
-  const displayMessages = retrievedDirectMessages.slice(-displayLimit);
+  async function fetchMessages() {
+    await retrieveMessagesAction({
+      receiver_id: parseInt(roomId),
+      receiver_class: classId,
+    });
+  }
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      setIsLoading(true);
-      await retrieveMessagesAction({
-        receiver_id: parseInt(roomId),
-        receiver_class: classId,
-      });
-
-      setIsLoading(false);
-    };
-
-    fetchMessages();
-  }, [roomId]);
-
-  useEffect(() => {
-    const fetchMessages = async () => {
-      await retrieveMessagesAction({
-        receiver_id: parseInt(roomId),
-        receiver_class: classId,
-      });
-    };
-
-    const intervalId = setInterval(fetchMessages, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [roomId]);
+  const isLoading = useDebouncedFetch(fetchMessages, 1000, [roomId]);
 
   if (isLoading) {
     return <SimpleLoader />;
   }
+
+  const displayMessages = retrievedDirectMessages.slice(-displayLimit);
 
   return (
     <div
