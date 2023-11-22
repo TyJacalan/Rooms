@@ -76,7 +76,7 @@ export default function RoomBody() {
     const intervalId = setInterval(fetchMessages, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [roomId]);
 
   useEffect(() => {
     if (retrievedDirectMessages) {
