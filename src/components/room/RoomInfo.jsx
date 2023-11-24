@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 import { findUserById } from "@/lib/utils";
-import useUsersData from "@/hooks/useUsersData";
+import useUsersData from "@/hooks/useUsersdata";
 
+import AddRoomMember from "./AddRoomMember";
 import SimpleLoader from "@/components/shared/simpleLoader";
 import {
   ProfileContainer,
@@ -20,7 +21,8 @@ const initialState = {
 
 export default function RoomInfo() {
   const { roomId } = useParams();
-  const { roomData, getRoomsDetailsAction } = useMessagesContext();
+  const { roomData, getRoomsDetailsAction, addRoomMemberAction } =
+    useMessagesContext();
   const [roomDetails, setRoomDetails] = useState(initialState);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,7 +35,7 @@ export default function RoomInfo() {
     }
 
     getRoomDetails();
-  }, [roomId]);
+  }, [roomId, addRoomMemberAction]);
 
   useEffect(() => {
     async function updateRoomDetails() {
@@ -84,6 +86,7 @@ export default function RoomInfo() {
           {Array.isArray(members) &&
             members.length > 0 &&
             members.map((member) => <div key={member.id}>{member.uid}</div>)}
+          <AddRoomMember />
         </ProfileInfoItem>
       </ProfileInfoContainer>
     </ProfileContainer>

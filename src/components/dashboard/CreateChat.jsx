@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 import { useComponentContext } from "@/store/contexts/componentContext";
-import { useUsersData } from "@/hooks/useUsersdata";
+import useUsersData from "@/hooks/useUsersdata";
 import { getTempNameByEmail } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
