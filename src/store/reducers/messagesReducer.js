@@ -45,7 +45,7 @@ export default function messagesReducer(state, action) {
     case types.GET_ROOM_DETAILS:
       return {
         ...state,
-        retrievedRoomMessages: payload ? payload : [],
+        roomData: payload ? payload : {},
       };
 
     case types.ACTION_FAIL:
@@ -56,7 +56,7 @@ export default function messagesReducer(state, action) {
     case types.SET_ROOM_DATA:
       return {
         ...state,
-        roomData: payload ? payload : null,
+        roomData: payload ? payload : {},
       };
     case types.SET_TOAST_MESSAGE:
       return {

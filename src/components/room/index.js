@@ -3,7 +3,7 @@ import RoomFooter from "./RoomFooter";
 import RoomHeader from "./RoomHeader";
 import RoomHeaderIcon from "./RoomHeaderIcon";
 import RoomHeaderProfile from "./RoomHeaderProfile";
-import RoomProfile from "./RoomProfile";
+import RoomInfo from "./RoomInfo";
 import SendMessageForm from "./SendMessageForm";
 
 export {
@@ -12,6 +12,6 @@ export {
   RoomHeader,
   RoomHeaderIcon,
   RoomHeaderProfile,
-  RoomProfile,
+  RoomInfo,
   SendMessageForm,
 };

@@ -2,37 +2,24 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
+import useDebouncedFetch from "@/hooks/useDebouncedFetch";
 
-import { MessageBubble } from "./MessageBubble";
+import SimpleLoader from "@/components/shared/SimpleLoader";
 import ChatBubbleContainer from "./ChatBubbleContainer";
 import RoomBubbleContainer from "./RoomBubbleContainer";
-import { Loader2 } from "lucide-react";
-
-const ScrollToBottom = () => {
-  const elementRef = useRef();
-  useEffect(() =>
-    elementRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-      inline: "nearest",
-    })
-  );
-  return <div ref={elementRef} />;
-};
+import ScrollToBottom from "@/components/shared/ScrollToBottom";
 
 export default function RoomBody() {
   const { classId, roomId } = useParams();
   const { retrievedDirectMessages, retrieveMessagesAction } =
     useMessagesContext();
-  const [conversationData, setConversationData] = useState([]);
-  const [isLoading, setIsLoading] = useState();
 
   const containerRef = useRef(null);
   const [displayLimit, setDisplayLimit] = useState(20);
 
   function handleScroll() {
     const { scrollTop } = containerRef.current;
-    if (scrollTop === 0 && conversationData.length > displayLimit) {
+    if (scrollTop === 0 && retrievedDirectMessages.length > displayLimit) {
       const newDisplayLimit = displayLimit + 20;
       setDisplayLimit(newDisplayLimit);
     }
@@ -47,37 +34,22 @@ export default function RoomBody() {
         containerRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [displayLimit, conversationData]);
+  }, [displayLimit]);
 
-  const displayMessages = conversationData.slice(-displayLimit);
+  async function fetchMessages() {
+    await retrieveMessagesAction({
+      receiver_id: parseInt(roomId),
+      receiver_class: classId,
+    });
+  }
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      setIsLoading(false);
-      await retrieveMessagesAction({
-        receiver_id: parseInt(roomId),
-        receiver_class: classId,
-      });
-
-      setIsLoading(false);
-    };
-
-    fetchMessages();
-  }, [classId, roomId]);
-
-  useEffect(() => {
-    if (retrievedDirectMessages) {
-      setConversationData(retrievedDirectMessages);
-    }
-  }, [retrieveMessagesAction]);
+  const isLoading = useDebouncedFetch(fetchMessages, 1000, [roomId]);
 
   if (isLoading) {
-    return (
-      <div className="flex-1 w-full items-center justify-center">
-        <Loader2 className="animate-spin" />
-      </div>
-    );
+    return <SimpleLoader />;
   }
+
+  const displayMessages = retrievedDirectMessages.slice(-displayLimit);
 
   return (
     <div

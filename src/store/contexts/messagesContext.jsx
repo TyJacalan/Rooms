@@ -10,7 +10,7 @@ const initialState = {
   retrievedRoomMessages: [],
   usersList: [],
   friendsList: [],
-  roomData: null,
+  roomData: {},
   roomsList: [],
   roomsError: null,
   toastMessage: null,

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useComponentContext } from "@/store/contexts/componentContext";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
-import { getTempNameByEmail } from "../../lib/utils";
+import { getTempNameByEmail } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -27,7 +28,7 @@ const initialUserState = {
 };
 
 export default function CreateChat() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isCreateChatOpen, toggleCreateChat } = useComponentContext();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(initialUserState);
   const { usersList } = useMessagesContext();
@@ -63,7 +64,7 @@ export default function CreateChat() {
   }
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
+    <Popover open={isCreateChatOpen} onOpenChange={toggleCreateChat}>
       <PopoverTrigger asChild className="w-full text-center hidden sm:block">
         <span>New Chat</span>
       </PopoverTrigger>

@@ -9,9 +9,10 @@ import {
   Home,
   Profile,
   Room,
-  Settings,
   SignIn,
   SignUp,
+  BuildPage,
+  ErrorPage,
 } from "./pages";
 
 import { Toaster } from "@/components/ui/toaster";
@@ -26,13 +27,14 @@ export default function App() {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/:classId/:roomId/:name" element={<Room />} />
           <Route path="/:classId/:roomId/:name/Profile" element={<Room />} />
-          <Route path="/Settings" element={<Settings />} />
+          <Route path="/Settings" element={<BuildPage />} />
         </Route>
 
         <Route element={<AuthLayout />}>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </main>
   );
