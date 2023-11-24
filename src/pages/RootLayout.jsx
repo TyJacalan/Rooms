@@ -3,7 +3,6 @@ import { Outlet, Navigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 
-import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/components/ui/use-toast";
 import { DashboardHeader, DashboardSidebar } from "@/components/dashboard";
 
@@ -35,7 +34,6 @@ export default function RootLayout() {
         <Navigate to={"/signin"} />
       ) : (
         <section className="h-screen w-screen flex flex-col space-y-4 mx-auto p-4 overflow-hidden">
-          <Toaster />
           <DashboardHeader />
           <div className="flex-1 w-full flex flex-row gap-4 overflow-hidden">
             <DashboardSidebar />
