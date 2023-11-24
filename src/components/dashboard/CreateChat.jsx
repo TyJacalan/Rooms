@@ -66,13 +66,19 @@ export default function CreateChat() {
 
   return (
     <Popover open={isCreateChatOpen} onOpenChange={toggleCreateChat}>
-      <PopoverTrigger asChild className="w-full text-center hidden sm:block">
-        <span>New Chat</span>
+      <PopoverTrigger
+        asChild
+        className="w-full flex flex-row items-center justify-around"
+      >
+        <div>
+          <span className="hidden sm:block">New Chat</span>
+          <span className="sm:hidden">
+            <Plus size={14} />
+          </span>
+        </div>
       </PopoverTrigger>
-      <PopoverTrigger asChild className="sm:hidden">
-        <Plus size={14} />
-      </PopoverTrigger>
-      <PopoverContent className="p-2" side="right" align="start">
+
+      <PopoverContent align="start" sideOffset="2">
         <form
           className="flex flex-col gap-2"
           onSubmit={(e) => handleSubmit(e, selectedUser)}
