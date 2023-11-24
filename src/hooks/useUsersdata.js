@@ -2,7 +2,7 @@ import * as api from "@/store/api/messagesAPI";
 
 import { useMemo, useEffect, useState } from "react";
 
-export function useUsersData() {
+export default function useUsersData() {
   const [usersData, setUsersData] = useState([]);
 
   useEffect(() => {

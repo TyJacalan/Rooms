@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 import { findUserById } from "@/lib/utils";
-import { useUsersData } from "@/hooks/useUsersData";
+import useUsersData from "@/hooks/useUsersData";
 
 import SimpleLoader from "@/components/shared/simpleLoader";
 import {
