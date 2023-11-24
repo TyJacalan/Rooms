@@ -5,7 +5,13 @@ import { MessageBubble } from "./MessageBubble";
 export default function ChatBubbleContainer({ displayMessages }) {
   const { roomId } = useParams();
 
-  console.log(displayMessages);
+  if (!displayMessages || displayMessages.length === 0) {
+    return (
+      <div className="h-full w-full flex items-center justify-center">
+        No messages yet. Say hi!
+      </div>
+    );
+  }
 
   return (
     <>
