@@ -5,7 +5,7 @@ import { findUserById } from "@/lib/utils";
 import useUsersData from "@/hooks/useUsersdata";
 
 import AddRoomMember from "./AddRoomMember";
-import SimpleLoader from "@/components/shared/simpleLoader";
+import SimpleLoader from "@/components/shared/SimpleLoader";
 import {
   ProfileContainer,
   ProfileInfoContainer,
