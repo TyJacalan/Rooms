@@ -18,7 +18,9 @@ export default function ConfigContainer() {
     <>
       <SidebarItem>
         <SidebarItemIcon>
-          <User />
+          <Link to="/Profile">
+            <User strokeWidth={1} />
+          </Link>
         </SidebarItemIcon>
         <SidebarItemLabel>
           <Link to="/Profile">{getTempNameByEmail(profile.uid)}</Link>
@@ -27,7 +29,9 @@ export default function ConfigContainer() {
 
       <SidebarItem>
         <SidebarItemIcon>
-          <Settings />
+          <Link to="/Settings">
+            <Settings strokeWidth={1} />
+          </Link>
         </SidebarItemIcon>
         <SidebarItemLabel>
           <Link to="/Settings">Settings</Link>
