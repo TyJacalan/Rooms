@@ -61,8 +61,6 @@ export default function RoomInfo() {
 
   const { name, ownerName, members } = roomDetails;
 
-  console.log(isLoading);
-
   if (isLoading) {
     return <SimpleLoader />;
   }
