@@ -70,7 +70,7 @@ export default function SignIn() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          <Button className="w-full">
+          <Button className="w-full" disabled={isLoading}>
             {isLoading ? <Loader2 className="animate-spin" /> : "Log In"}
           </Button>
           <div className="text-center text-xs text-muted-foreground">

@@ -13,30 +13,42 @@ export default function SendMessageForm() {
   const [isLoading, setIsLoading] = useState(false);
   const { sendMessageAction } = useMessagesContext();
 
+  function handleKeyDown(e) {
+    if (e.code === "Enter" && !e.shiftKey && !e.altKey && !e.ctrlKey) {
+      handleSubmit(e);
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
+    if (message) {
+      setIsLoading(true);
 
-    await sendMessageAction({
-      receiver_id: roomId,
-      receiver_class: classId,
-      body: message,
-    });
+      await sendMessageAction({
+        receiver_id: roomId,
+        receiver_class: classId,
+        body: message,
+      });
 
-    setMessage("");
+      setMessage("");
 
-    setIsLoading(false);
+      setIsLoading(false);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-row gap-2">
+    <form
+      onKeyDown={handleKeyDown}
+      onSubmit={handleSubmit}
+      className="w-full flex flex-row gap-2"
+    >
       <Textarea
         name="message"
         className="h-[1rem] min-h-[38px] bg-zinc-200 dark:bg-zinc-900 focus-visible:ring-0 resize-none custom-scrollbar scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <Button variant="ghost" size="icon">
+      <Button variant="ghost" size="icon" disabled={isLoading}>
         {isLoading ? (
           <Loader2 size={16} className="animate-spin" />
         ) : (
