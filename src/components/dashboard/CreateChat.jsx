@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useComponentContext } from "@/store/contexts/componentContext";
-import { useMessagesContext } from "@/store/contexts/messagesContext";
+import { useUsersData } from "@/hooks/useUsersdata";
 import { getTempNameByEmail } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -31,8 +31,9 @@ export default function CreateChat() {
   const { isCreateChatOpen, toggleCreateChat } = useComponentContext();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(initialUserState);
-  const { usersList } = useMessagesContext();
   const navigate = useNavigate();
+
+  const usersData = useUsersData();
 
   async function handleSubmit(e, userData) {
     e.preventDefault();
@@ -86,7 +87,7 @@ export default function CreateChat() {
             <CommandList>
               <CommandEmpty>No users found.</CommandEmpty>
               <CommandGroup>
-                {usersList.map((user) => (
+                {usersData.map((user) => (
                   <CommandItem
                     key={user.id}
                     onSelect={() => setSelectedUser(user)}

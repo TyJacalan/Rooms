@@ -60,31 +60,6 @@ export async function retrieveMessagesAction(receiverData) {
   }
 }
 
-export async function getUserListAction() {
-  try {
-    const response = await api.getUserList();
-
-    const { error, usersData } = response;
-
-    if (error) {
-      return {
-        type: types.ACTION_FAIL,
-        payload: error,
-      };
-    } else {
-      return {
-        type: types.GET_USER_LIST,
-        payload: usersData,
-      };
-    }
-  } catch (error) {
-    return {
-      type: types.ACTION_FAIL,
-      payload: types.ERROR_MESSAGE,
-    };
-  }
-}
-
 export async function createRoomAction(roomData) {
   try {
     const response = await api.createRoom(roomData);
