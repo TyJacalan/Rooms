@@ -14,8 +14,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CreateRoomForm from "./CreateRoomForm";
 
 export default function RoomsContainer() {
-  const { roomsList } = useMessagesContext();
+  const { roomsList, getRoomsAction } = useMessagesContext();
   const navigate = useNavigate();
+
+  getRoomsAction();
 
   function handleClick(room) {
     navigate(`/Channel/${room.id}/${room.name}`);
