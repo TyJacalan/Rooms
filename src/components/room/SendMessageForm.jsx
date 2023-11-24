@@ -31,7 +31,7 @@ export default function SendMessageForm() {
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-row gap-2">
       <Textarea
-        className="h-[1rem] min-h-[38px] bg-zinc-200 dark:bg-zinc-900 focus-visible:ring-0 resize-none scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800 scrollbar-track-transparent"
+        className="h-[1rem] min-h-[38px] bg-zinc-200 dark:bg-zinc-900 focus-visible:ring-0 resize-none custom-scrollbar scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-800"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
