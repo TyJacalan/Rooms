@@ -17,6 +17,7 @@ export default function RoomBubbleContainer({ displayMessages }) {
       {profile &&
         displayMessages.map((message, index) => (
           <div
+            key={index}
             className={`flex flex-row items-end gap-2 ${
               message.sender.id == profile.data.id ? "flex-row-reverse" : ""
             }`}
@@ -28,7 +29,6 @@ export default function RoomBubbleContainer({ displayMessages }) {
               </AvatarFallback>
             </Avatar>
             <MessageBubble
-              key={index}
               variant={
                 message.sender.id == profile.data.id ? "secondary" : "primary"
               }
