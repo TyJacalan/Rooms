@@ -70,11 +70,13 @@ export default function CreateChat() {
         asChild
         className="w-full flex flex-row items-center justify-around"
       >
-        <div>
-          <span className="hidden sm:block">New Chat</span>
-          <span className="sm:hidden">
+        <div className="w-full">
+          <Button variant="outline" className="w-full hidden sm:block">
+            New Chat
+          </Button>
+          <Button size="icon" variant="outline" className="sm:hidden">
             <Plus size={14} />
-          </span>
+          </Button>
         </div>
       </PopoverTrigger>
 

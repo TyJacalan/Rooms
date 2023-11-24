@@ -12,7 +12,6 @@ import {
 import { Users2 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import CreateRoomForm from "./CreateRoomForm";
 
 export default function RoomsContainer() {
   const { roomsList, getRoomsAction } = useMessagesContext();
@@ -33,9 +32,6 @@ export default function RoomsContainer() {
           <Users2 />
         </SidebarItemIcon>
         <SidebarItemLabel>Rooms</SidebarItemLabel>
-        <SidebarAccordionContent className="border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50">
-          <CreateRoomForm />
-        </SidebarAccordionContent>
         {roomsList.map((room) => (
           <SidebarAccordionContent
             key={room.id}

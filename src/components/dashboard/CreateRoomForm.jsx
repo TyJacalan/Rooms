@@ -69,11 +69,18 @@ export default function CreateRoomForm() {
 
   return (
     <Dialog open={isCreateRoomOpen} onOpenChange={toggleCreateRoom}>
-      <DialogTrigger asChild className="w-full text-center hidden sm:block">
-        <span>New Room</span>
-      </DialogTrigger>
-      <DialogTrigger>
-        <Plus size={14} />
+      <DialogTrigger
+        asChild
+        className="w-full flex flex-row items-center justify-between text-center sm:block"
+      >
+        <div className="w-full">
+          <Button variant="outline" className="w-full hidden sm:block">
+            New Room
+          </Button>
+          <Button size="icon" variant="outline" className="sm:hidden">
+            <Plus size={14} />
+          </Button>
+        </div>
       </DialogTrigger>
       <form onSubmit={handleSubmit}>
         <DialogContent className="max-w-[80%] min-w-max sm:max-w-[425px] overflow-hidden text-zinc-900 dark:text-zinc-50">

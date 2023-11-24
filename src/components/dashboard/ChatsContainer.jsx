@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageSquare } from "lucide-react";
-import CreateChat from "./CreateChat";
 
 export default function ChatsContainer() {
   const navigate = useNavigate();
@@ -31,9 +30,6 @@ export default function ChatsContainer() {
         <MessageSquare />
       </SidebarItemIcon>
       <SidebarItemLabel>Chats</SidebarItemLabel>
-      <SidebarAccordionContent className="border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50">
-        <CreateChat />
-      </SidebarAccordionContent>
       {!friendsList ? (
         <SidebarAccordionContent className="hidden sm:flex">
           Nothing to display
