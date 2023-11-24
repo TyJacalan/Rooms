@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
@@ -17,7 +18,9 @@ export default function RoomsContainer() {
   const { roomsList, getRoomsAction } = useMessagesContext();
   const navigate = useNavigate();
 
-  getRoomsAction();
+  useEffect(() => {
+    getRoomsAction();
+  }, []);
 
   function handleClick(room) {
     navigate(`/Channel/${room.id}/${room.name}`);
