@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import AuthProvider from "@/store/contexts/authContext";
-import ComponentProvider from "@/store/contexts/ComponentContext.jsx";
+import ComponentProvider from "@/store/contexts/componentContext.jsx";
 import MessagesProvider from "@/store/contexts/messagesContext";
 import ThemeProvider from "@/store/contexts/themeContext";
 
