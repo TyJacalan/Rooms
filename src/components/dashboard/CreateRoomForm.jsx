@@ -71,7 +71,7 @@ export default function CreateRoomForm() {
     <Dialog open={isCreateRoomOpen} onOpenChange={toggleCreateRoom}>
       <DialogTrigger
         asChild
-        className="w-full flex flex-row items-center justify-between text-center sm:block"
+        className="w-full flex flex-row items-center justify-around text-center sm:block"
       >
         <div className="w-full">
           <Button variant="outline" className="w-full hidden sm:block">
@@ -89,22 +89,19 @@ export default function CreateRoomForm() {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="flex flex-col items-start gap-2">
-              <Label htmlFor="name" className="text-right">
+              <Label htmlFor="roomName" className="text-right">
                 Room Name
               </Label>
               <Input
-                id="name"
+                id="roomName"
                 className="col-span-3"
                 value={roomName}
                 onChange={(e) => setRoomName(e.target.value)}
               />
             </div>
             <div>
-              <Label htmlFor="usersList">Users</Label>
-              <div
-                id="usersList"
-                className="h-fit max-w-[16rem] xs:max-w-[20rem] sm:max-w-sm flex items-center justify-start flex-wrap gap-1"
-              >
+              <div>Users</div>
+              <div className="h-fit max-w-[16rem] xs:max-w-[20rem] sm:max-w-sm flex items-center justify-start flex-wrap gap-1">
                 {usersList &&
                   usersList.map((user, index) => (
                     <div
