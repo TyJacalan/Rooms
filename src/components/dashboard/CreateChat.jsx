@@ -88,6 +88,8 @@ export default function CreateChat() {
           <Command>
             <CommandSeparator />
             <CommandInput
+              name="selectUserInput"
+              autocomplete={false}
               placeholder="Select a user..."
               value={selectedUser.uid}
               onValueChange={handleInputChange}
