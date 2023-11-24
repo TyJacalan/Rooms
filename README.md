@@ -1,6 +1,6 @@
 # Rooms
 
-A messeging application that uses an api built by Avion School (see api documentation [here](https://docs.avionschool.com/avn-mcourse/-MYjabeTubdULkJ4UAcG/lessons/project-slack-app))
+A messaging application that uses an api built by Avion School (see api documentation [here](https://docs.avionschool.com/avn-mcourse/-MYjabeTubdULkJ4UAcG/lessons/project-slack-app))
 
 ![Monosnap Image 2023-11-25 00 28 15](https://github.com/TyJacalan/Rooms/assets/143598524/360e0ab3-41be-49b7-a8bd-548f6aae9979)
 
