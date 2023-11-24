@@ -16,7 +16,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 export default function App() {
   return (
-    <main className="h-full w-full bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-hidden">
+    <main className="h-full w-full flex items-center justify-center bg-slate-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50 overflow-hidden">
       <Toaster />
       <Routes>
         <Route element={<RootLayout />}>
