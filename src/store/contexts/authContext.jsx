@@ -9,7 +9,7 @@ const initialState = {
   accessToken: null,
   signInError: null,
   signUpErrors: {},
-  toastMessage: null,
+  authMessage: null,
 };
 
 const AuthContext = createContext();

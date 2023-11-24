@@ -20,12 +20,12 @@ export default function messagesReducer(state, action) {
     case types.CREATE_ROOM:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.ADD_USER_TO_ROOM:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.GET_ROOMS:
       return {
@@ -46,7 +46,7 @@ export default function messagesReducer(state, action) {
     case types.ACTION_FAIL:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.SET_ROOM_DATA:
       return {
@@ -56,12 +56,12 @@ export default function messagesReducer(state, action) {
     case types.SET_TOAST_MESSAGE:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.CLEAR_MESSAGE:
       return {
         ...state,
-        toastMessage: null,
+        messagesMessage: null,
       };
 
     default:

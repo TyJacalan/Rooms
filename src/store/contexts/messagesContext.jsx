@@ -12,7 +12,7 @@ const initialState = {
   roomData: {},
   roomsList: [],
   roomsError: null,
-  toastMessage: null,
+  messagesMessage: null,
 };
 
 const MessagesContext = createContext();
@@ -42,9 +42,6 @@ export default function MessagesProvider({ children }) {
     },
     setRoomData: (roomData) => {
       dispatch({ type: types.SET_ROOM_DATA, payload: roomData });
-    },
-    setToastMessage: (message) => {
-      dispatch({ type: types.SET_TOAST_MESSAGE, payload: message });
     },
     clearMessageAction: () => {
       dispatch({ type: types.CLEAR_MESSAGE });

@@ -16,7 +16,7 @@ export async function signInAction(formData, navigate) {
       navigate("/");
       return {
         type: types.SIGNIN_SUCCESS,
-        payload: { ...profile, toastMessage: types.SIGNIN_SUCCESS_MESSAGE },
+        payload: { ...profile, authMessage: types.SIGNIN_SUCCESS_MESSAGE },
       };
     }
   } catch (error) {
@@ -64,7 +64,7 @@ export async function logOutAction() {
   } catch (error) {
     return {
       type: types.LOGOUT,
-      payload: types.ERROR_MESSAGE,
+      payload: types.ERROR_authMessage,
     };
   }
 }

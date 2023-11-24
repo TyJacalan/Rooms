@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorSpan } from "@/components/ui/error";
-import { useToast } from "@/components/ui/use-toast";
 
 export default function SignUp() {
   const [email, setEmail] = useState(null);
@@ -36,8 +35,6 @@ export default function SignUp() {
     formData.append("password_confirmation", passwordConfirmation);
 
     await signUpAction(formData, navigate);
-
-    toast({ description: toastMessage, duration: 5000 });
 
     setIsLoading(false);
   }

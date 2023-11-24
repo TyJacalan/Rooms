@@ -3,7 +3,9 @@ import { Outlet, Navigate } from "react-router-dom";
 import logo from "@public/logo.png";
 
 export default function AuthLayout() {
-  const accessToken = JSON.parse(localStorage.getItem("profile")) || null;
+  const profile = JSON.parse(localStorage.getItem("profile")) || null;
+  const accessToken = profile?.access_token;
+
   return (
     <>
       {accessToken ? (
