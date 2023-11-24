@@ -1,5 +1,5 @@
 import * as api from "@/store/api/messagesAPI";
-import * as types from "@/store/constants/messagesConstants";
+
 import { useMemo, useEffect, useState } from "react";
 
 export function useUsersData() {
@@ -28,25 +28,3 @@ export function useUsersData() {
 
   return memoizedUsersData;
 }
-
-// export async function getUserListAction() {
-//   try {
-//     const response = await api.getUserList();
-
-//     const { error, usersData } = response;
-
-//     if (error) {
-//       return {
-//         type: types.ACTION_FAIL,
-//         payload: error,
-//       };
-//     } else {
-//       return usersData;
-//     }
-//   } catch (error) {
-//     return {
-//       type: types.ACTION_FAIL,
-//       payload: types.ERROR_MESSAGE,
-//     };
-//   }
-// }

@@ -43,9 +43,6 @@ export default function MessagesProvider({ children }) {
     addRoomMemberAction: async (addMemberRequest) => {
       dispatch(await actions.addRoomMemberAction(addMemberRequest));
     },
-    setRoomData: (roomData) => {
-      dispatch({ type: types.SET_ROOM_DATA, payload: roomData });
-    },
     clearMessageAction: () => {
       dispatch({ type: types.CLEAR_MESSAGE });
     },
