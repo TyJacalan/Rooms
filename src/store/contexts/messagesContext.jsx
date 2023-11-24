@@ -28,6 +28,9 @@ export default function MessagesProvider({ children }) {
     retrieveMessagesAction: async (receiverData) => {
       dispatch(await actions.retrieveMessagesAction(receiverData));
     },
+    addUserAction: async (userData) => {
+      dispatch(await actions.addUserAction(userData));
+    },
     createRoomAction: async (roomData) => {
       dispatch(await actions.createRoomAction(roomData));
     },

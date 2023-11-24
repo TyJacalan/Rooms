@@ -2,7 +2,6 @@ import * as types from "../constants/messagesConstants";
 
 export default function messagesReducer(state, action) {
   const { type, payload } = action;
-  console.log("type: ", type, "payload: ", payload);
 
   switch (type) {
     case types.SEND_MESSAGE:
@@ -18,6 +17,16 @@ export default function messagesReducer(state, action) {
         retrievedDirectMessages: payload ? payload : [],
       };
     case types.CREATE_ROOM:
+      return {
+        ...state,
+        messagesMessage: payload ? payload : null,
+      };
+    case types.ADD_USER:
+      return {
+        ...state,
+        messagesMessage: payload ? payload : null,
+      };
+    case types.ADD_USER_FAIL:
       return {
         ...state,
         messagesMessage: payload ? payload : null,

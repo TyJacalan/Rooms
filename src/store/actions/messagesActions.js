@@ -60,6 +60,38 @@ export async function retrieveMessagesAction(receiverData) {
   }
 }
 
+export async function addUserAction(userData) {
+  try {
+    const newFriend = { id: userData.id, uid: userData.uid };
+    const existingFriendsList =
+      JSON.parse(localStorage.getItem("friendsList")) || [];
+    const isExistingFriend = existingFriendsList.some(
+      (friend) => friend.uid === newFriend.uid
+    );
+
+    if (!isExistingFriend) {
+      const updatedFriendsList = [...existingFriendsList, newFriend];
+
+      localStorage.setItem("friendsList", JSON.stringify(updatedFriendsList));
+
+      return {
+        type: types.ADD_USER,
+        payload: types.ADD_USER_SUCCESS_MESSAGE,
+      };
+    } else {
+      return {
+        type: types.ADD_USER_FAIL,
+        payload: types.ADD_USER_FAIL_MESSAGE,
+      };
+    }
+  } catch (error) {
+    return {
+      type: types.ACTION_FAIL,
+      payload: types.ERROR_MESSAGE,
+    };
+  }
+}
+
 export async function createRoomAction(roomData) {
   try {
     const response = await api.createRoom(roomData);

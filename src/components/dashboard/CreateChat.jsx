@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useMessagesContext } from "@/store/contexts/messagesContext";
 import { useComponentContext } from "@/store/contexts/componentContext";
 import { useUsersData } from "@/hooks/useUsersdata";
 import { getTempNameByEmail } from "@/lib/utils";
@@ -28,6 +29,7 @@ const initialUserState = {
 };
 
 export default function CreateChat() {
+  const { addUserAction } = useMessagesContext();
   const { isCreateChatOpen, toggleCreateChat } = useComponentContext();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(initialUserState);
@@ -39,14 +41,7 @@ export default function CreateChat() {
     e.preventDefault();
     setIsLoading(true);
 
-    const newFriend = { id: userData.id, uid: userData.uid };
-
-    const existingFriendsList =
-      JSON.parse(localStorage.getItem("friendsList")) || [];
-
-    const updatedFriendsList = [...existingFriendsList, newFriend];
-
-    localStorage.setItem("friendsList", JSON.stringify(updatedFriendsList));
+    addUserAction(userData);
 
     navigate(
       `/User/${userData.id}/${
@@ -89,7 +84,7 @@ export default function CreateChat() {
             <CommandSeparator />
             <CommandInput
               name="selectUserInput"
-              autocomplete={false}
+              autoComplete={false}
               placeholder="Select a user..."
               value={selectedUser.uid}
               onValueChange={handleInputChange}
@@ -109,7 +104,7 @@ export default function CreateChat() {
             </CommandList>
             <CommandSeparator />
           </Command>
-          <Button type="submit" size="sm">
+          <Button type="submit" size="sm" disabled={isLoading}>
             {isLoading ? (
               <Loader2 className="w-full animate-spin" />
             ) : (
