@@ -1,27 +1,38 @@
-# React + TypeScript + Vite
+# Rooms
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Monosnap Image 2023-11-25 00 28 15](https://github.com/TyJacalan/Rooms/assets/143598524/360e0ab3-41be-49b7-a8bd-548f6aae9979)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+A messenging application that uses an api built by Avion School (see api documentation [here](https://docs.avionschool.com/avn-mcourse/-MYjabeTubdULkJ4UAcG/lessons/project-slack-app))
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+* User is able to create his/her account with email and password
+* User is able to login his/her credentials
+* User is able to create new channel
+* User is able to add users on a channel
+* User is able to send message to other user (Direct message)
+* User is able to send message to a channel
+* User is able to receive message from other user (Direct message)
+* User is able to receive message from his/her channels
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+##Getting Started
+
+1. Clone the respository
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+git clone https://github.com/TyJacalan/Rooms.git
+```
+3. Go to the project directory and install dependencies
+```
+cd Rooms
+npm install
+```
+3. Create a `.env` file and add the api url
+```
+VITE_API_URL: 
+```
+4. Run the development
+```
+npm run build
+```
