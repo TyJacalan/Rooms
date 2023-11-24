@@ -64,7 +64,7 @@ export async function logOutAction() {
   } catch (error) {
     return {
       type: types.LOGOUT,
-      payload: types.ERROR_authMessage,
+      payload: types.ERROR_MESSAGE,
     };
   }
 }
