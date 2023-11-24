@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/command";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
 import { Loader2, Plus, X } from "lucide-react";
 
 export default function CreateRoomForm() {
@@ -31,6 +32,7 @@ export default function CreateRoomForm() {
   const [usersList, setUsersList] = useState([]);
   const [userName, setUserName] = useState("");
   const { createRoomAction, getRoomsAction } = useMessagesContext();
+  const { toast } = useToast();
 
   function handleUserInput(e) {
     setUserName(e);
@@ -43,6 +45,11 @@ export default function CreateRoomForm() {
     if (userToAdd && isUnique) {
       setUsersList([...usersList, { id: userToAdd.id, uid: userToAdd.uid }]);
       setUserName("");
+    } else {
+      toast({
+        description: "User already added.",
+        duration: 5000,
+      });
     }
   }
 
@@ -59,6 +66,9 @@ export default function CreateRoomForm() {
       name: roomName,
       user_ids: usersIds,
     });
+
+    setUsersList([]);
+    setRoomName("");
 
     await getRoomsAction();
 
@@ -148,7 +158,7 @@ export default function CreateRoomForm() {
           </div>
 
           <DialogFooter>
-            <Button type="submit" onClick={handleSubmit}>
+            <Button type="submit" onClick={handleSubmit} disabled={isLoading}>
               {isLoading ? (
                 <Loader2 className="w-full animate-spin" />
               ) : (
