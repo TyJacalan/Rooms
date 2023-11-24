@@ -11,8 +11,7 @@ import { Button } from "@/components/ui/button";
 import { MessageSquare, Users2 } from "lucide-react";
 
 export default function Home() {
-  const { toggleCreateChat, toggleCreateRoom, isCreateRoomOpen } =
-    useComponentContext();
+  const { toggleCreateChat, toggleCreateRoom } = useComponentContext();
   const profile = JSON.parse(localStorage.getItem("profile")) || null;
 
   const name = getTempNameByEmail(profile.uid);

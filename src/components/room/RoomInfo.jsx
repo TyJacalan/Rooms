@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useMessagesContext } from "@/store/contexts/messagesContext";
 import { findUserById } from "@/lib/utils";

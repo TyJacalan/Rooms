@@ -1,7 +1,4 @@
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
-import { useAuthContext } from "@/store/contexts/authContext";
 
 import {
   AuthLayout,

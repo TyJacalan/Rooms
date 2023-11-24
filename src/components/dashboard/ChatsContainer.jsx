@@ -1,8 +1,6 @@
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useMessagesContext } from "@/store/contexts/messagesContext";
-import { getFriendsList, getTempNameByEmail } from "../../lib/utils";
+import { getTempNameByEmail } from "../../lib/utils";
 
 import {
   SidebarItem,
