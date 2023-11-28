@@ -1,3 +1,4 @@
+import { getTempNameByEmail } from "@/lib/utils";
 import { MessageBubble } from "./MessageBubble";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -18,7 +19,7 @@ export default function RoomBubbleContainer({ displayMessages }) {
         displayMessages.map((message, index) => (
           <div
             key={index}
-            className={`flex flex-row items-end gap-2 ${
+            className={`flex flex-row items-end gap-2 mt-2 ${
               message.sender.id == profile.data.id ? "flex-row-reverse" : ""
             }`}
           >
@@ -28,13 +29,19 @@ export default function RoomBubbleContainer({ displayMessages }) {
                 {message.sender.uid[0].toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <MessageBubble
-              variant={
-                message.sender.id == profile.data.id ? "secondary" : "primary"
-              }
-            >
-              {message.body}
-            </MessageBubble>
+            <div className="flex flex-col">
+              <MessageBubble
+                variant={
+                  message.sender.id == profile.data.id ? "secondary" : "primary"
+                }
+                className="flex-1"
+              >
+                {message.body}
+              </MessageBubble>
+              <span className="text-xs pt-1">
+                {getTempNameByEmail(message.sender.uid)}
+              </span>
+            </div>
           </div>
         ))}
     </>
