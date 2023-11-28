@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useMessagesContext } from "@/store/contexts/messagesContext";
-import { getFriendsList, getTempNameByEmail } from "../../lib/utils";
+import { useComponentContext } from "@/store/contexts/componentContext";
+import useUsersData from "@/hooks/useUsersdata";
+import { getTempNameByEmail } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Command,
   CommandEmpty,
@@ -28,25 +29,19 @@ const initialUserState = {
 };
 
 export default function CreateChat() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { addUserAction } = useMessagesContext();
+  const { isCreateChatOpen, toggleCreateChat } = useComponentContext();
   const [isLoading, setIsLoading] = useState(false);
   const [selectedUser, setSelectedUser] = useState(initialUserState);
-  const { usersList, setFriendsList } = useMessagesContext();
   const navigate = useNavigate();
+
+  const usersData = useUsersData();
 
   async function handleSubmit(e, userData) {
     e.preventDefault();
     setIsLoading(true);
 
-    const newFriend = { id: userData.id, uid: userData.uid };
-
-    const existingFriendsList =
-      JSON.parse(localStorage.getItem("friendsList")) || [];
-
-    const updatedFriendsList = [...existingFriendsList, newFriend];
-
-    localStorage.setItem("friendsList", JSON.stringify(updatedFriendsList));
-    setFriendsList(updatedFriendsList);
+    addUserAction(userData);
 
     navigate(
       `/User/${userData.id}/${
@@ -65,14 +60,22 @@ export default function CreateChat() {
   }
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger asChild className="w-full text-center hidden sm:block">
-        <span>New Chat</span>
+    <Popover open={isCreateChatOpen} onOpenChange={toggleCreateChat}>
+      <PopoverTrigger
+        asChild
+        className="w-full flex flex-row items-center justify-around"
+      >
+        <div className="w-full">
+          <Button variant="outline" className="w-full hidden sm:block">
+            New Chat
+          </Button>
+          <Button size="icon" variant="outline" className="sm:hidden">
+            <Plus size={14} />
+          </Button>
+        </div>
       </PopoverTrigger>
-      <PopoverTrigger asChild className="sm:hidden">
-        <Plus size={14} />
-      </PopoverTrigger>
-      <PopoverContent className="p-2" side="right" align="start">
+
+      <PopoverContent align="start" sideOffset="2">
         <form
           className="flex flex-col gap-2"
           onSubmit={(e) => handleSubmit(e, selectedUser)}
@@ -80,6 +83,8 @@ export default function CreateChat() {
           <Command>
             <CommandSeparator />
             <CommandInput
+              name="selectUserInput"
+              autoComplete={false}
               placeholder="Select a user..."
               value={selectedUser.uid}
               onValueChange={handleInputChange}
@@ -87,7 +92,7 @@ export default function CreateChat() {
             <CommandList>
               <CommandEmpty>No users found.</CommandEmpty>
               <CommandGroup>
-                {usersList.map((user) => (
+                {usersData.map((user) => (
                   <CommandItem
                     key={user.id}
                     onSelect={() => setSelectedUser(user)}
@@ -99,7 +104,7 @@ export default function CreateChat() {
             </CommandList>
             <CommandSeparator />
           </Command>
-          <Button type="submit" size="sm">
+          <Button type="submit" size="sm" disabled={isLoading}>
             {isLoading ? (
               <Loader2 className="w-full animate-spin" />
             ) : (

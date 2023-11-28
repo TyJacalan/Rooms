@@ -56,3 +56,9 @@
     --ring: 240 4.9% 83.9%;
   }
 }
+
+@layer components {
+  .custom-scrollbar {
+    @apply scrollbar-none scrollbar-thumb-rounded-md hover:scrollbar-thin;
+  }
+}

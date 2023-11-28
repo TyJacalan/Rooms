@@ -3,9 +3,10 @@ import Home from "./Home";
 import Profile from "./Profile";
 import Room from "./Room";
 import RootLayout from "./RootLayout";
-import Settings from "./Settings";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import BuildPage from "./BuildPage";
+import ErrorPage from "./ErrorPage";
 
 export {
   AuthLayout,
@@ -13,7 +14,8 @@ export {
   Home,
   Profile,
   Room,
-  Settings,
   SignIn,
   SignUp,
+  BuildPage,
+  ErrorPage,
 };

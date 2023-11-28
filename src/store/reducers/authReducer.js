@@ -2,7 +2,6 @@ import * as types from "../constants/authConstants";
 
 export default function authReducer(state, action) {
   const { type, payload } = action;
-  console.log("type:", type, "payload:", payload);
 
   switch (type) {
     case types.SIGNUP_SUCCESS:
@@ -10,13 +9,13 @@ export default function authReducer(state, action) {
         ...state,
         signInError: null,
         signUpErrors: {},
-        toastMessage: payload ? payload : null,
+        authMessage: payload ? payload : null,
       };
 
     case types.SIGNUP_FAIL:
       return {
         ...state,
-        toastMessage: null,
+        authMessage: null,
         signInError: null,
         signUpErrors: payload ? payload : {},
       };
@@ -29,13 +28,13 @@ export default function authReducer(state, action) {
         expiry: payload ? payload.expiry : null,
         uid: payload ? payload.uid : null,
         signInError: null,
-        toastMessage: payload ? payload.toastMessage : null,
+        authMessage: payload ? payload.authMessage : null,
       };
 
     case types.SIGNIN_FAIL:
       return {
         ...state,
-        toastMessage: null,
+        authMessage: null,
         signUpErrors: {},
         signInError: payload ? payload : null,
       };
@@ -49,13 +48,13 @@ export default function authReducer(state, action) {
         uid: null,
         signInError: null,
         signUpErrors: {},
-        toastMessage: payload ? payload : null,
+        authMessage: payload ? payload : null,
       };
 
     case types.CLEAR_MESSAGE:
       return {
         ...state,
-        toastMessage: null,
+        authMessage: null,
         signInError: null,
         signUpErrors: {},
       };

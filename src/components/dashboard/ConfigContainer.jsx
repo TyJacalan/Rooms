@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { getTempNameByEmail } from "@/lib/utils";
+
 import { LogOut, Settings, User } from "lucide-react";
 
 import {
@@ -10,20 +12,26 @@ import {
 import LogOutButton from "./LogOutButton";
 
 export default function ConfigContainer() {
+  const profile = JSON.parse(localStorage.getItem("profile")) || null;
+
   return (
     <>
       <SidebarItem>
         <SidebarItemIcon>
-          <User />
+          <Link to="/Profile">
+            <User strokeWidth={1} />
+          </Link>
         </SidebarItemIcon>
         <SidebarItemLabel>
-          <Link to="/Profile">Ty Jacalan</Link>
+          <Link to="/Profile">{getTempNameByEmail(profile.uid)}</Link>
         </SidebarItemLabel>
       </SidebarItem>
 
       <SidebarItem>
         <SidebarItemIcon>
-          <Settings />
+          <Link to="/Settings">
+            <Settings strokeWidth={1} />
+          </Link>
         </SidebarItemIcon>
         <SidebarItemLabel>
           <Link to="/Settings">Settings</Link>

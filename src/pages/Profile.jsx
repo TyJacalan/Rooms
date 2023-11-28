@@ -1,5 +1,26 @@
-import React from "react";
+import {
+  ProfileContainer,
+  ProfileInfoContainer,
+  ProfileInfoItem,
+} from "@/components/profile";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Profile() {
-  return <div>Profile</div>;
+  const profileData = JSON.parse(localStorage.getItem("profile")).data || null;
+
+  const { uid, email, name, nickname } = profileData;
+
+  return (
+    <ProfileContainer>
+      <Avatar className="h-24 w-24 text-6xl">
+        <AvatarImage src="/" />
+        <AvatarFallback>{uid[0].toUpperCase()}</AvatarFallback>
+      </Avatar>
+      <ProfileInfoContainer>
+        <ProfileInfoItem>{name}</ProfileInfoItem>
+        <ProfileInfoItem>{nickname}</ProfileInfoItem>
+        <ProfileInfoItem>{email}</ProfileInfoItem>
+      </ProfileInfoContainer>
+    </ProfileContainer>
+  );
 }

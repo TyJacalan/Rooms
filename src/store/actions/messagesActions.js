@@ -60,21 +60,28 @@ export async function retrieveMessagesAction(receiverData) {
   }
 }
 
-export async function getUserListAction() {
+export async function addUserAction(userData) {
   try {
-    const response = await api.getUserList();
+    const newFriend = { id: userData.id, uid: userData.uid };
+    const existingFriendsList =
+      JSON.parse(localStorage.getItem("friendsList")) || [];
+    const isExistingFriend = existingFriendsList.some(
+      (friend) => friend.uid === newFriend.uid
+    );
 
-    const { error, usersData } = response;
+    if (!isExistingFriend) {
+      const updatedFriendsList = [...existingFriendsList, newFriend];
 
-    if (error) {
+      localStorage.setItem("friendsList", JSON.stringify(updatedFriendsList));
+
       return {
-        type: types.ACTION_FAIL,
-        payload: error,
+        type: types.ADD_USER,
+        payload: types.ADD_USER_SUCCESS_MESSAGE,
       };
     } else {
       return {
-        type: types.GET_USER_LIST,
-        payload: usersData,
+        type: types.ADD_USER_FAIL,
+        payload: types.ADD_USER_FAIL_MESSAGE,
       };
     }
   } catch (error) {
@@ -139,7 +146,7 @@ export async function getRoomsDetailsAction(channelId) {
   try {
     const response = await api.getRoomsDetails(channelId);
 
-    const { error, roomDetails } = response;
+    const { error, data } = response;
 
     if (error) {
       return {
@@ -149,7 +156,7 @@ export async function getRoomsDetailsAction(channelId) {
     } else {
       return {
         type: types.GET_ROOM_DETAILS,
-        payload: roomDetails,
+        payload: data.data.data,
       };
     }
   } catch (error) {

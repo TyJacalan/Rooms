@@ -2,14 +2,8 @@ import * as types from "../constants/messagesConstants";
 
 export default function messagesReducer(state, action) {
   const { type, payload } = action;
-  console.log("type: ", type, "payload: ", payload);
 
   switch (type) {
-    case types.GET_USER_LIST:
-      return {
-        ...state,
-        usersList: payload ? payload : [],
-      };
     case types.SEND_MESSAGE:
       return {
         ...state,
@@ -25,12 +19,22 @@ export default function messagesReducer(state, action) {
     case types.CREATE_ROOM:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
+      };
+    case types.ADD_USER:
+      return {
+        ...state,
+        messagesMessage: payload ? payload : null,
+      };
+    case types.ADD_USER_FAIL:
+      return {
+        ...state,
+        messagesMessage: payload ? payload : null,
       };
     case types.ADD_USER_TO_ROOM:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.GET_ROOMS:
       return {
@@ -45,28 +49,28 @@ export default function messagesReducer(state, action) {
     case types.GET_ROOM_DETAILS:
       return {
         ...state,
-        retrievedRoomMessages: payload ? payload : [],
+        roomData: payload ? payload : {},
       };
 
     case types.ACTION_FAIL:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.SET_ROOM_DATA:
       return {
         ...state,
-        roomData: payload ? payload : null,
+        roomData: payload ? payload : {},
       };
     case types.SET_TOAST_MESSAGE:
       return {
         ...state,
-        toastMessage: payload ? payload : null,
+        messagesMessage: payload ? payload : null,
       };
     case types.CLEAR_MESSAGE:
       return {
         ...state,
-        toastMessage: null,
+        messagesMessage: null,
       };
 
     default:

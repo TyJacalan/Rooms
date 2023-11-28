@@ -13,7 +13,6 @@ function authInterceptor(req) {
     req.headers.uid = profile.uid || "";
   }
 
-  console.log(req);
   return req;
 }
 
@@ -27,7 +26,6 @@ export const API = axios.create({
 API.interceptors.request.use(authInterceptor);
 
 export async function handleApiError(error) {
-  console.log(error);
   try {
     return { error: error, data: null };
   } catch (err) {

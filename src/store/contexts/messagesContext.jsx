@@ -8,12 +8,11 @@ const initialState = {
   directMessages: [],
   retrievedDirectMessages: [],
   retrievedRoomMessages: [],
-  usersList: [],
   friendsList: [],
-  roomData: null,
+  roomData: {},
   roomsList: [],
   roomsError: null,
-  toastMessage: null,
+  messagesMessage: null,
 };
 
 const MessagesContext = createContext();
@@ -29,8 +28,8 @@ export default function MessagesProvider({ children }) {
     retrieveMessagesAction: async (receiverData) => {
       dispatch(await actions.retrieveMessagesAction(receiverData));
     },
-    getUserListAction: async () => {
-      dispatch(await actions.getUserListAction());
+    addUserAction: async (userData) => {
+      dispatch(await actions.addUserAction(userData));
     },
     createRoomAction: async (roomData) => {
       dispatch(await actions.createRoomAction(roomData));
@@ -43,12 +42,6 @@ export default function MessagesProvider({ children }) {
     },
     addRoomMemberAction: async (addMemberRequest) => {
       dispatch(await actions.addRoomMemberAction(addMemberRequest));
-    },
-    setRoomData: (roomData) => {
-      dispatch({ type: types.SET_ROOM_DATA, payload: roomData });
-    },
-    setToastMessage: (message) => {
-      dispatch({ type: types.SET_TOAST_MESSAGE, payload: message });
     },
     clearMessageAction: () => {
       dispatch({ type: types.CLEAR_MESSAGE });
